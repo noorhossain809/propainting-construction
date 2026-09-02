@@ -1,0 +1,25 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "E:\\web-development\\blood-donation\\blood-donation-backend\\logs\\winston\\errors\\.341e351de5763ccfd99ff4be030917e24b58058c-audit.json",
+    "files": [
+        {
+            "date": 1720415871411,
+            "name": "E:\\web-development\\blood-donation\\blood-donation-backend\\logs\\winston\\errors\\phu-2024-08-07-11-error.log",
+            "hash": "4ccb5e1cefafbbcb336ba8a841e9d6e6faa539e948017269b8351420582ff663"
+        },
+        {
+            "date": 1720524945543,
+            "name": "E:\\web-development\\blood-donation\\blood-donation-backend\\logs\\winston\\errors\\phu-2024-09-07-17-error.log",
+            "hash": "b7b565316c9d4732b6019ecec7e29a059141f526c239114bf37b2c8f1db9c3e3"
+        },
+        {
+            "date": 1720526951262,
+            "name": "E:\\web-development\\blood-donation\\blood-donation-backend\\logs\\winston\\errors\\phu-2024-09-07-18-error.log",
+            "hash": "daa8cce98d0f6a8284a46d25ab1a8bdd0d8e73a59a0453aabd97526227fc7927"
+        }
+    ],
+    "hashType": "sha256"
+}

@@ -1,0 +1,155 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "C:\\webdevelopment\\propaint-construction\\paintion-backend\\logs\\winston\\successes\\.50f96309cfeb4945624b616166328638469661f1-audit.json",
+    "files": [
+        {
+            "date": 1787373581495,
+            "name": "C:\\webdevelopment\\propaint-construction\\paintion-backend\\logs\\winston\\successes\\phu-2026-22-08-10-success.log",
+            "hash": "4c93e1f855827a58aa7a84efd9a2a31afe344678a70a32cb3269cb28245074d3"
+        },
+        {
+            "date": 1787387859804,
+            "name": "C:\\webdevelopment\\propaint-construction\\paintion-backend\\logs\\winston\\successes\\phu-2026-22-08-14-success.log",
+            "hash": "742dc9145ba3b9566d5638e3aba4f0533cccf215239d008f2c14ed7247d014e7"
+        },
+        {
+            "date": 1787415514187,
+            "name": "C:\\webdevelopment\\propaint-construction\\paintion-backend\\logs\\winston\\successes\\phu-2026-22-08-22-success.log",
+            "hash": "d6be88d3acc5334457fcc45dd80f75a2589ae65c558cd574298df4d66671624b"
+        },
+        {
+            "date": 1787419175940,
+            "name": "C:\\webdevelopment\\propaint-construction\\paintion-backend\\logs\\winston\\successes\\phu-2026-22-08-23-success.log",
+            "hash": "2ff0a0d0e1b2a85e14242181957f23b88c01a152e77d496732fd69cf9bec01a9"
+        },
+        {
+            "date": 1787463496807,
+            "name": "C:\\webdevelopment\\propaint-construction\\paintion-backend\\logs\\winston\\successes\\phu-2026-23-08-11-success.log",
+            "hash": "0fcd3bca6ad801338acc4ba016e70525d979807f1d19bbb28f2bd34b8db615d4"
+        },
+        {
+            "date": 1787501221678,
+            "name": "C:\\webdevelopment\\propaint-construction\\paintion-backend\\logs\\winston\\successes\\phu-2026-23-08-22-success.log",
+            "hash": "a9e1081c3a061e86d7e2cd8b5c77746c802b855da848ab33dedea5fc05b3c036"
+        },
+        {
+            "date": 1787548307974,
+            "name": "C:\\webdevelopment\\propaint-construction\\paintion-backend\\logs\\winston\\successes\\phu-2026-24-08-11-success.log",
+            "hash": "6098eb7b582cc5828b6b131edb49e2670325705a127dca61af4c15572002476d"
+        },
+        {
+            "date": 1787567695811,
+            "name": "C:\\webdevelopment\\propaint-construction\\paintion-backend\\logs\\winston\\successes\\phu-2026-24-08-16-success.log",
+            "hash": "b28d2e055699bb5e64a4ce3f8980ca69f0beb4e4420af2e13a06070993d8e1b6"
+        },
+        {
+            "date": 1787569253866,
+            "name": "C:\\webdevelopment\\propaint-construction\\paintion-backend\\logs\\winston\\successes\\phu-2026-24-08-17-success.log",
+            "hash": "acf1fedbf1c61d867281657361336f97691e836dcecfd47208a797020a566b16"
+        },
+        {
+            "date": 1787573858341,
+            "name": "C:\\webdevelopment\\propaint-construction\\paintion-backend\\logs\\winston\\successes\\phu-2026-24-08-18-success.log",
+            "hash": "925b19451a8fab3a650de6c86d805d347869e2a1d2d73c6178f9e13e2c6b1198"
+        },
+        {
+            "date": 1787629290334,
+            "name": "C:\\webdevelopment\\propaint-construction\\paintion-backend\\logs\\winston\\successes\\phu-2026-25-08-09-success.log",
+            "hash": "b1c295dad13a0048c35c65a59dd964ea10c89c663b90b46ed8194c8997b83192"
+        },
+        {
+            "date": 1787668168338,
+            "name": "C:\\webdevelopment\\propaint-construction\\paintion-backend\\logs\\winston\\successes\\phu-2026-25-08-20-success.log",
+            "hash": "15fd302a4f16ab38be4c656a230b0f37b0a6b0cf5d0fa91061b5e03bb42ddb60"
+        },
+        {
+            "date": 1787721951703,
+            "name": "C:\\webdevelopment\\propaint-construction\\paintion-backend\\logs\\winston\\successes\\phu-2026-26-08-11-success.log",
+            "hash": "a589a3ab6791eb6797d144fae888ddc9b58a1a64e68018e4d454c9c0cf464066"
+        },
+        {
+            "date": 1787888283551,
+            "name": "C:\\webdevelopment\\propaint-construction\\paintion-backend\\logs\\winston\\successes\\phu-2026-28-08-09-success.log",
+            "hash": "05c677190b63ae9ed2598599f0a51e2b43e5f26d8f59b19b0e20d8cc91c6c8b1"
+        },
+        {
+            "date": 1787890296921,
+            "name": "C:\\webdevelopment\\propaint-construction\\paintion-backend\\logs\\winston\\successes\\phu-2026-28-08-10-success.log",
+            "hash": "df8842fd8e745c34aadf8b6d85cd830648e894cf72617747a443bf46b209550d"
+        },
+        {
+            "date": 1787893475981,
+            "name": "C:\\webdevelopment\\propaint-construction\\paintion-backend\\logs\\winston\\successes\\phu-2026-28-08-11-success.log",
+            "hash": "9ace7d6d05909dd146e66c1bd5e9785268b8ee38c7c393bac1ed82518d3ef3de"
+        },
+        {
+            "date": 1787974868576,
+            "name": "C:\\webdevelopment\\propaint-construction\\paintion-backend\\logs\\winston\\successes\\phu-2026-29-08-09-success.log",
+            "hash": "fdcf911be779e27c2b49e5b5960d226b07e24ff861c9c189229b7bac4f1bbe4f"
+        },
+        {
+            "date": 1787976836827,
+            "name": "C:\\webdevelopment\\propaint-construction\\paintion-backend\\logs\\winston\\successes\\phu-2026-29-08-10-success.log",
+            "hash": "694c89ff1db4f76db0e033dad394153e973cc2ddf6dbf260b6cbb8821aeb20fe"
+        },
+        {
+            "date": 1787979836824,
+            "name": "C:\\webdevelopment\\propaint-construction\\paintion-backend\\logs\\winston\\successes\\phu-2026-29-08-11-success.log",
+            "hash": "5ca551858cd2f449f86cce519964222db6edae3d9f42e0f3bdcf0d90ebf4b63f"
+        },
+        {
+            "date": 1787985285933,
+            "name": "C:\\webdevelopment\\propaint-construction\\paintion-backend\\logs\\winston\\successes\\phu-2026-29-08-12-success.log",
+            "hash": "d991626dd4bfd20f4ce02157a44847723bcb608c707567be3b5e2f89c4686a2b"
+        },
+        {
+            "date": 1788004741592,
+            "name": "C:\\webdevelopment\\propaint-construction\\paintion-backend\\logs\\winston\\successes\\phu-2026-29-08-17-success.log",
+            "hash": "be92d10ce591606fa9293e9c7ca06996cf769d071899b79bce0c562b925046c2"
+        },
+        {
+            "date": 1788059648360,
+            "name": "C:\\webdevelopment\\propaint-construction\\paintion-backend\\logs\\winston\\successes\\phu-2026-30-08-09-success.log",
+            "hash": "c17ba30a6e5fb20c6c33253caea68290c8af5e271b7582d6039c319a427b4644"
+        },
+        {
+            "date": 1788149468508,
+            "name": "C:\\webdevelopment\\propaint-construction\\paintion-backend\\logs\\winston\\successes\\phu-2026-31-08-10-success.log",
+            "hash": "2681ab6e88ee040f58837fb220e3377ca85463aa8f8aa1e6a6ac0b498bb8a958"
+        },
+        {
+            "date": 1788248491751,
+            "name": "C:\\webdevelopment\\propaint-construction\\paintion-backend\\logs\\winston\\successes\\phu-2026-01-09-13-success.log",
+            "hash": "08c57b45836a5335f15cf53e24f1faaea51b5b3a87f219d3d13a6b24f9fa53e7"
+        },
+        {
+            "date": 1788260557962,
+            "name": "C:\\webdevelopment\\propaint-construction\\paintion-backend\\logs\\winston\\successes\\phu-2026-01-09-17-success.log",
+            "hash": "70bcaa31c34aec5e3ccd8e865c92a05d4a4885f4740ac5571cab7fc35188bd1c"
+        },
+        {
+            "date": 1788264582790,
+            "name": "C:\\webdevelopment\\propaint-construction\\paintion-backend\\logs\\winston\\successes\\phu-2026-01-09-18-success.log",
+            "hash": "92d48f135e370ee5f1210ac64957ecac69b52a8e188fc2c1ca4a0da41cbb86f9"
+        },
+        {
+            "date": 1788267754497,
+            "name": "C:\\webdevelopment\\propaint-construction\\paintion-backend\\logs\\winston\\successes\\phu-2026-01-09-19-success.log",
+            "hash": "ba943085d13063b9f204ec533ffb5f5157e3d678d05ab04b2cd375699ac7a068"
+        },
+        {
+            "date": 1788339990434,
+            "name": "C:\\webdevelopment\\propaint-construction\\paintion-backend\\logs\\winston\\successes\\phu-2026-02-09-15-success.log",
+            "hash": "974badb3550f378eb206def5db88a523641cedd1a5709872317186ad830c41b5"
+        },
+        {
+            "date": 1788349160491,
+            "name": "C:\\webdevelopment\\propaint-construction\\paintion-backend\\logs\\winston\\successes\\phu-2026-02-09-17-success.log",
+            "hash": "21e20c2ae917768e76cc39b6723888aaad524581b2cb6c07359ca81e69006a3e"
+        }
+    ],
+    "hashType": "sha256"
+}

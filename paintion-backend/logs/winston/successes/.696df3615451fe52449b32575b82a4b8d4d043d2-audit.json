@@ -1,0 +1,35 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "D:\\web-development\\New folder\\web-development\\blood-donation\\blood-donation-backend\\logs\\winston\\successes\\.696df3615451fe52449b32575b82a4b8d4d043d2-audit.json",
+    "files": [
+        {
+            "date": 1729318159166,
+            "name": "D:\\web-development\\New folder\\web-development\\blood-donation\\blood-donation-backend\\logs\\winston\\successes\\phu-2024-19-10-12-success.log",
+            "hash": "9d46af4ad5ddf0a37de22a706c190b5bdcf7cafcbb9934c3ca9fa485f37b87e8"
+        },
+        {
+            "date": 1729750320467,
+            "name": "D:\\web-development\\New folder\\web-development\\blood-donation\\blood-donation-backend\\logs\\winston\\successes\\phu-2024-24-10-12-success.log",
+            "hash": "8719d8598a64cab3dcf3744f5701b0978782f6b5978c49b2b03bbc201143cfa7"
+        },
+        {
+            "date": 1729757944629,
+            "name": "D:\\web-development\\New folder\\web-development\\blood-donation\\blood-donation-backend\\logs\\winston\\successes\\phu-2024-24-10-14-success.log",
+            "hash": "ab5f6119108665876bd351c46d49486beb858883ed6ce8515d5accdedd55ca5d"
+        },
+        {
+            "date": 1729769253495,
+            "name": "D:\\web-development\\New folder\\web-development\\blood-donation\\blood-donation-backend\\logs\\winston\\successes\\phu-2024-24-10-17-success.log",
+            "hash": "36252a5fcfffd9a087b12c0f5a433da9d53daae29cf8d506b6a5d710d73b8ab6"
+        },
+        {
+            "date": 1729828560381,
+            "name": "D:\\web-development\\New folder\\web-development\\blood-donation\\blood-donation-backend\\logs\\winston\\successes\\phu-2024-25-10-09-success.log",
+            "hash": "7efb7f57055ad5bbf74e2bbae25e9f8b875c96c437879fe2437aba2b1a15e277"
+        }
+    ],
+    "hashType": "sha256"
+}
