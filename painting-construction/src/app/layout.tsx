@@ -5,6 +5,7 @@ import Header from "./component/common/Header";
 import Footer from "./component/common/Footer";
 import MotionLayout from "./MotionLayout";
 import ReduxProvider from "@/redux/Providers";
+import GlobalLoader from "@/components/ui/GlobalLoader";
 
 const geistManrope = Manrope({
   variable: "--font-geist-manrope",
@@ -43,6 +44,7 @@ export default function RootLayout({
         className={`${geistManrope.variable} ${geistTeko.variable} ${geistOpenSans.variable} antialiased`}
       >
         <ReduxProvider>
+          <GlobalLoader />
           <Header />
 
           <MotionLayout>{children}</MotionLayout>
