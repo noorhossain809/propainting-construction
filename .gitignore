@@ -1,0 +1,25 @@
+# ---- Dependencies ----
+**/node_modules/
+
+# ---- Build outputs ----
+**/.next/
+**/out/
+**/build/
+paintion-backend/dist/
+
+# ---- Deploy bundles / archives (never commit these) ----
+*.zip
+
+# ---- Backend runtime data ----
+paintion-backend/logs/
+paintion-backend/uploads/
+
+# ---- Env files (secrets) ----
+**/.env
+**/.env.*
+!**/.env.example
+
+# ---- Misc ----
+**/.DS_Store
+**/*.log
+**/.vercel
