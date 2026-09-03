@@ -164,7 +164,7 @@ const Header: React.FC = () => {
                       ))}
 
                       <li className="flex justify-end hover:text-yellow-500 hover:font-medium">
-                        <Link href="service">
+                        <Link href="/service">
                           <div className="flex gap-1 items-center">
                             <p>See All</p>
                             <svg
@@ -193,7 +193,7 @@ const Header: React.FC = () => {
                     <ul className="grid w-[100px] gap-4">
                       <li className="space-y-1">
                         <NavigationMenuLink asChild>
-                          <Link href="our-work">Completed</Link>
+                          <Link href="/our-work">Completed</Link>
                         </NavigationMenuLink>
                         <NavigationMenuLink asChild>
                           <Link href="#">In Action</Link>
