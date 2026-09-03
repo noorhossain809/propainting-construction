@@ -3,6 +3,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Clock, Mail, MapPin, Phone } from "lucide-react";
 import { useGetContactInfoQuery } from "@/redux/api/contactInfoApi";
+import { Loader } from "@/components/ui/Loader";
 
 // Committed fallback contact info — used when the backend is empty/unreachable.
 const FALLBACK_CONTACT = {
@@ -18,7 +19,16 @@ const telHref = (phone: string) => `tel:${phone.replace(/[^+\d]/g, "")}`;
 
 // The four contact cards on the /contact page, driven by live contact info.
 export default function ContactInfoCards() {
-  const { data } = useGetContactInfoQuery();
+  const { data, isLoading } = useGetContactInfoQuery();
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center py-16">
+        <Loader label="Loading contact info" />
+      </div>
+    );
+  }
+
   const info = data ?? FALLBACK_CONTACT;
 
   return (

@@ -7,6 +7,7 @@ import { PhoneCall, CircleCheck } from "lucide-react";
 import { motion, Variants } from "framer-motion";
 import Link from "next/link";
 import { useGetContactInfoQuery } from "@/redux/api/contactInfoApi";
+import { Loader } from "@/components/ui/Loader";
 
 // Committed fallback phone numbers — used when the backend is empty/unreachable.
 const FALLBACK_PHONES = {
@@ -35,7 +36,7 @@ const itemVariants: Variants = {
 };
 
 export default function AboutBlock() {
-  const { data } = useGetContactInfoQuery();
+  const { data, isLoading } = useGetContactInfoQuery();
   const phones = data ?? FALLBACK_PHONES;
 
   return (
@@ -131,6 +132,10 @@ export default function AboutBlock() {
                     call support center 24x7
                   </div>
                     <div className="flex flex-col">
+                      {isLoading ? (
+                        <Loader size="sm" className="items-start" />
+                      ) : (
+                        <>
                       <a
                     href={telHref(phones.phoneOne)}
                     className="md:text-lg text-base font-semibold tracking-wide text-slate-900 hover:text-amber-600"
@@ -145,6 +150,8 @@ export default function AboutBlock() {
                {phones.phoneTwo}
             </a>
                   )}
+                        </>
+                      )}
                     </div>
                 </div>
               </div>

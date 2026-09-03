@@ -14,6 +14,7 @@ import {
 import { Phone, Mail, MapPin, Clock, Upload } from "lucide-react";
 import { Variants, motion } from "framer-motion";
 import { useGetContactInfoQuery } from "@/redux/api/contactInfoApi";
+import { Loader } from "@/components/ui/Loader";
 
 type ContactInfoData = {
   phoneOne: string;
@@ -188,7 +189,7 @@ const formChild: Variants = {
 const Contact = () => {
   const words = ["Get Your", "Free Quote"];
 
-  const { data } = useGetContactInfoQuery();
+  const { data, isLoading } = useGetContactInfoQuery();
   const contactInfo = buildContactInfo(data ?? FALLBACK_CONTACT);
 
   return (
@@ -247,7 +248,12 @@ const Contact = () => {
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
           >
-            {contactInfo.map((item, i) => {
+            {isLoading && (
+              <div className="flex justify-center py-10">
+                <Loader label="Loading contact info" />
+              </div>
+            )}
+            {!isLoading && contactInfo.map((item, i) => {
               const Icon = item.icon;
               return (
                 <motion.div key={i} variants={infoChild}>

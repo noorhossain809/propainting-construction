@@ -4,6 +4,7 @@ import { Phone, Mail, MapPin, Facebook, Twitter, Instagram, Linkedin } from "luc
 import Image from "next/image";
 import Link from "next/link";
 import { useGetContactInfoQuery } from "@/redux/api/contactInfoApi";
+import { Loader } from "@/components/ui/Loader";
 
 // Committed fallback contact info — used whenever the live backend is
 // empty or unreachable (kept, not removed).
@@ -20,7 +21,7 @@ const FALLBACK_CONTACT = {
 const telHref = (phone: string) => `tel:${phone.replace(/[^+\d]/g, "")}`;
 
 const Footer = () => {
-  const { data } = useGetContactInfoQuery();
+  const { data, isLoading } = useGetContactInfoQuery();
   const info = data ?? FALLBACK_CONTACT;
 
   return (
@@ -82,6 +83,10 @@ const Footer = () => {
           
           <div>
             <h4 className="text-lg font-semibold mb-6">Contact Info</h4>
+            {isLoading ? (
+              <Loader size="sm" className="items-start py-4" />
+            ) : (
+            <>
             <div className="space-y-4 text-white/80 md:text-base text-sm">
               <div className="flex items-center space-x-3">
                 <Phone className="w-5 h-5 text-orange-400" />
@@ -119,6 +124,8 @@ const Footer = () => {
                 {info.insuranceText}
               </p>
             </div>
+            </>
+            )}
           </div>
         </div>
         

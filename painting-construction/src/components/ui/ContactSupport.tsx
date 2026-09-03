@@ -3,6 +3,7 @@
 import Image from "next/image";
 import React from "react";
 import { useGetContactInfoQuery } from "@/redux/api/contactInfoApi";
+import { Loader } from "@/components/ui/Loader";
 
 // Committed fallback contact info — used when the backend is empty/unreachable.
 const FALLBACK_CONTACT = {
@@ -15,7 +16,7 @@ const FALLBACK_CONTACT = {
 const telHref = (phone: string) => `tel:${phone.replace(/[^+\d]/g, "")}`;
 
 const ContactSupport = () => {
-  const { data } = useGetContactInfoQuery();
+  const { data, isLoading } = useGetContactInfoQuery();
   const info = data ?? FALLBACK_CONTACT;
 
   return (
@@ -27,6 +28,10 @@ const ContactSupport = () => {
         role="region"
       >
         <div className="flex flex-col items-center text-center gap-4 mb-60">
+          {isLoading ? (
+            <Loader label="Loading" className="py-6 text-white/70" />
+          ) : (
+          <>
           {/* phone icon */}
           <svg
             className="h-8 w-8 text-amber-400"
@@ -96,6 +101,8 @@ const ContactSupport = () => {
               {info.email}
             </a>
           </div>
+          </>
+          )}
         </div>
 
         {/* Agent image anchored bottom, overlaps card */}

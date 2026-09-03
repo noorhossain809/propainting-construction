@@ -20,6 +20,7 @@ import "swiper/css/effect-fade";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { useGetAllHeroSlidesQuery } from "@/redux/api/heroSlideApi";
+import { Loader } from "@/components/ui/Loader";
 
 // Defaults applied to slides that don't specify their own badge/buttons.
 const DEFAULT_BADGE = "PRO PAINTING CONSTRUCTION";
@@ -129,7 +130,16 @@ const fallbackViews: HeroView[] = slides.map((s, i) => ({
 }));
 
 export default function HeroBanner() {
-  const { data: liveSlides } = useGetAllHeroSlidesQuery();
+  const { data: liveSlides, isLoading } = useGetAllHeroSlidesQuery();
+
+  // Show the loader while the DB responds — never flash static slides first.
+  if (isLoading) {
+    return (
+      <section className="relative grid h-[75vh] place-items-center bg-[#0B2653] md:h-[90vh]">
+        <Loader size="lg" label="Loading" />
+      </section>
+    );
+  }
 
   // Prefer live API slides (active, ordered); fall back to the static list.
   const views: HeroView[] =
