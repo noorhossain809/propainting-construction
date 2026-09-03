@@ -31,8 +31,13 @@ const SidebarNavigation = ({ isMobile = false }: { isMobile?: boolean }) => {
   const pathname = usePathname();
   const shouldShowText = isMobile || open;
 
-  // Unread ("new") message count for the Messages badge.
-  const { data: messages } = useGetAllContactMessagesQuery();
+  // Unread ("new") message count for the Messages badge. Poll so new
+  // submissions from the public site appear without a manual refresh.
+  const { data: messages } = useGetAllContactMessagesQuery(undefined, {
+    pollingInterval: 15000,
+    refetchOnFocus: true,
+    refetchOnReconnect: true,
+  });
   const unreadCount = messages?.filter((m) => m.status === "new").length ?? 0;
 
   return (

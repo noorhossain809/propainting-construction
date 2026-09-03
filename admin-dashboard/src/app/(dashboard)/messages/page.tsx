@@ -47,7 +47,11 @@ type Filter = "all" | IContactMessage["status"]
 
 export default function MessagesPage() {
   const { data: messages, isLoading, isError, refetch, isFetching } =
-    useGetAllContactMessagesQuery()
+    useGetAllContactMessagesQuery(undefined, {
+      pollingInterval: 15000,
+      refetchOnFocus: true,
+      refetchOnReconnect: true,
+    })
   const [updateStatus] = useUpdateContactMessageStatusMutation()
   const [deleteMessage, { isLoading: isDeleting }] =
     useDeleteContactMessageMutation()

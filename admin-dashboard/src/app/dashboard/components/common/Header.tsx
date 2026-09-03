@@ -12,7 +12,12 @@ import { useGetAllContactMessagesQuery } from '@/redux/api/contactMessageApi';
 export const Header = () => {
   const { toggleSidebar } = useSidebar(); // <-- toggleSidebar হুকটি ব্যবহার করবো
 
-  const { data: messages } = useGetAllContactMessagesQuery();
+  // Poll so the bell badge updates when new messages arrive from the site.
+  const { data: messages } = useGetAllContactMessagesQuery(undefined, {
+    pollingInterval: 15000,
+    refetchOnFocus: true,
+    refetchOnReconnect: true,
+  });
   const unreadCount = messages?.filter((m) => m.status === 'new').length ?? 0;
 
   return (
