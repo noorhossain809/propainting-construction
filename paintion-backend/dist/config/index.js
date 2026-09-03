@@ -21,4 +21,13 @@ exports.default = {
         expires_in: process.env.JWT_EXPIRES_IN,
         refresh_expires_in: process.env.JWT_REFRESH_EXPIRES_IN,
     },
+    smtp: {
+        host: process.env.SMTP_HOST,
+        port: process.env.SMTP_PORT,
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS,
+        from: process.env.MAIL_FROM,
+        // Inbox that should receive contact-form notifications.
+        to: process.env.MAIL_TO,
+    },
 };

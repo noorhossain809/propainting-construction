@@ -9,9 +9,26 @@ import cookieParser from 'cookie-parser';
 
 const app: Application = express();
 
+// Allowed browser origins (site + admin, local + production). Extra origins can
+// be added via the CORS_ORIGINS env var (comma-separated) without a code change.
+const allowedOrigins = [
+  'http://localhost:3000',
+  'http://localhost:3001',
+  'https://propaintconstruction.com',
+  'https://www.propaintconstruction.com',
+  'https://admin.propaintconstruction.com',
+  ...(process.env.CORS_ORIGINS?.split(',').map(o => o.trim()).filter(Boolean) ?? []),
+];
+
 app.use(cors({
-  origin: ["http://localhost:3000", "http://localhost:3001"],
-  credentials: true
+  origin(origin, callback) {
+    // Allow non-browser clients (no Origin header) and any whitelisted origin.
+    if (!origin || allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+    return callback(new Error('Not allowed by CORS'));
+  },
+  credentials: true,
 }));
 app.use(cookieParser());
 

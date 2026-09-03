@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const constructionProject_route_1 = require("../modules/constructionProject/constructionProject.route");
 const contactInfo_route_1 = require("../modules/contactInfo/contactInfo.route");
+const contactMessage_route_1 = require("../modules/contactMessage/contactMessage.route");
 const heroSlide_route_1 = require("../modules/heroSlider/heroSlide.route");
 const team_router_1 = require("../modules/our-team/team.router");
 const services_router_1 = require("../modules/services/services.router");
@@ -28,6 +29,10 @@ const moduleRoutes = [
     {
         path: "/contact-info",
         routes: contactInfo_route_1.ContactInfoRoutes
+    },
+    {
+        path: "/contact-message",
+        routes: contactMessage_route_1.ContactMessageRoutes
     },
     {
         path: "/team",

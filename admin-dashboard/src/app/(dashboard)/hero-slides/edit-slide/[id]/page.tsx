@@ -85,7 +85,7 @@ export default function EditHeroSlidePage() {
     setPreview(file ? URL.createObjectURL(file) : null)
   }
 
-  const isDirectVideoFile = (url: string) => /\.(mp4|webm|ogg)(\?.*)?$/i.test(url)
+  // const isDirectVideoFile = (url: string) => /\.(mp4|webm|ogg)(\?.*)?$/i.test(url)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()

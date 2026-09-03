@@ -6,6 +6,25 @@ import { Loader2, Lock } from "lucide-react"
 import { GoogleLogin, CredentialResponse } from "@react-oauth/google"
 
 import { useLoginMutation, useGoogleLoginMutation } from "@/redux/api/authApi"
+import { setAuthToken } from "@/lib/authToken"
+
+type ApiError = {
+  data?: {
+    message?: string
+  }
+}
+
+function getErrorMessage(err: unknown, fallback: string): string {
+  if (
+    typeof err === "object" &&
+    err !== null &&
+    "data" in err &&
+    typeof (err as ApiError).data?.message === "string"
+  ) {
+    return (err as ApiError).data!.message!
+  }
+  return fallback
+}
 
 export default function LoginPage() {
   const router = useRouter()
@@ -21,10 +40,11 @@ export default function LoginPage() {
     setError(null)
 
     try {
-      await login({ email, password }).unwrap()
+      const { token } = await login({ email, password }).unwrap()
+      setAuthToken(token)
       router.push("/")
-    } catch (err: any) {
-      setError(err?.data?.message || "Invalid email or password.")
+    } catch (err: unknown) {
+      setError(getErrorMessage(err, "Invalid email or password."))
     }
   }
 
@@ -36,10 +56,11 @@ export default function LoginPage() {
     }
 
     try {
-      await googleLogin({ idToken: credentialResponse.credential }).unwrap()
+      const { token } = await googleLogin({ idToken: credentialResponse.credential }).unwrap()
+      setAuthToken(token)
       router.push("/")
-    } catch (err: any) {
-      setError(err?.data?.message || "This Google account is not registered as an admin.")
+    } catch (err: unknown) {
+      setError(getErrorMessage(err, "This Google account is not registered as an admin."))
     }
   }
 

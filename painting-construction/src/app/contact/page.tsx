@@ -1,3 +1,5 @@
+// contact page
+
 import ContactForm from "@/components/ui/contactForm";
 import ContactSupport from "@/components/ui/ContactSupport";
 import ContactInfoCards from "../component/client-component/ContactInfoCards";

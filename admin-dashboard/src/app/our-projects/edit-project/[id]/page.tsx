@@ -3,7 +3,7 @@
 
 import * as React from "react"
 import { useParams, useRouter } from "next/navigation"
-import { Loader2, X } from "lucide-react"
+import { Loader2, } from "lucide-react"
 import Image from "next/image"
 
 import {
