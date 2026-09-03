@@ -1,4 +1,4 @@
-// contact page
+// contact page section
 
 import ContactForm from "@/components/ui/contactForm";
 import ContactSupport from "@/components/ui/ContactSupport";
