@@ -11,6 +11,8 @@ import {
   Building2,
   Ruler,
   CalendarDays,
+  Star,
+  Quote,
 } from "lucide-react";
 import {
   Carousel,
@@ -39,6 +41,7 @@ type ProjectDetail = {
   challenge?: string;
   solution?: string;
   results: string[];
+  testimonial?: { text: string; author: string; rating: number };
 };
 
 // Fetch a single project from the live backend by its Mongo _id.
@@ -69,6 +72,14 @@ async function fetchLiveProject(id: string): Promise<ProjectDetail | null> {
       challenge: p.challenge,
       solution: p.solution,
       results: Array.isArray(p.results) ? p.results : [],
+      testimonial:
+        p.testimonial?.text && p.testimonial?.author
+          ? {
+              text: p.testimonial.text,
+              author: p.testimonial.author,
+              rating: p.testimonial.rating ?? 5,
+            }
+          : undefined,
     };
   } catch {
     return null;
@@ -91,6 +102,7 @@ function fromStatic(id: string): ProjectDetail | null {
     challenge: p.challenge,
     solution: p.solution,
     results: p.results,
+    testimonial: p.testimonial,
   };
 }
 
@@ -315,6 +327,33 @@ const PortfolioDetails = async(props: Props) => {
                   ))}
                 </ul>
               </div>
+
+              {/* Client Testimonial */}
+              {project.testimonial?.text && project.testimonial?.author && (
+                <div className="mt-10 rounded-2xl border border-amber-100 bg-amber-50/60 p-8">
+                  <Quote className="h-9 w-9 text-amber-400" />
+                  <p className="mt-4 text-lg italic leading-relaxed text-slate-700">
+                    “{project.testimonial.text.trim()}”
+                  </p>
+                  <div className="mt-5 flex items-center gap-3">
+                    <div className="flex items-center gap-1">
+                      {Array.from({ length: 5 }).map((_, i) => (
+                        <Star
+                          key={i}
+                          className={`h-4 w-4 ${
+                            i < Math.round(project.testimonial!.rating)
+                              ? "fill-amber-400 text-amber-400"
+                              : "fill-slate-200 text-slate-200"
+                          }`}
+                        />
+                      ))}
+                    </div>
+                    <span className="font-bold text-[#0B2653]">
+                      {project.testimonial.author}
+                    </span>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
 

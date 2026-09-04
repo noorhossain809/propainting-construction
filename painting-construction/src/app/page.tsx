@@ -4,6 +4,7 @@ import Contact from "./component/home/Contact";
 import HeroBanner from "./component/home/HeroBanner";
 import Portfolio from "./component/home/Portfolio";
 import ServicesSection from "./component/home/ServicesSection";
+import Testimonials from "./component/home/Testimonials";
 import { Metadata } from "next";
 import { services } from "./data/projects";
 
@@ -64,6 +65,7 @@ export default function Home() {
       <AboutBlock />
       <ServicesSection />
       <Portfolio />
+      <Testimonials />
       <RealitySection />
       <Contact />
     </main>
