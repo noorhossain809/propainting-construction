@@ -130,7 +130,7 @@ const Footer = () => {
         </div>
         
         <div className="border-t border-white/10 mt-12 pt-8 text-center text-white/60 md:text-base text-sm">
-          <p>&copy; 2025 Pro Painting Construction. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Pro Painting Construction. All rights reserved.</p>
         </div>
       </div>
     </footer>
