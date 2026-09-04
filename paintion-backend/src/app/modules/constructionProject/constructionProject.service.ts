@@ -19,8 +19,8 @@ const getOneByIdFromDB = async (id: string) => {
 
 const updateIntoDB = async (id: string, payload: Partial<IProject>) => {
     const result = await Project.findByIdAndUpdate(id, payload, {
-        new: true,          // updated document return করবে
-        runValidators: true, // schema validation চালাবে update-এর সময়ও
+        new: true,          // return the updated document
+        runValidators: true, // run schema validation on update too
     })
     return result
 }

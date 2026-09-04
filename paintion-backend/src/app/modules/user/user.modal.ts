@@ -4,7 +4,7 @@ import bcrypt from "bcrypt"
 export interface IUser extends Document {
     name: string
     email: string
-    password?: string          // Google user এর password থাকবে না
+    password?: string          // Google users won't have a password
     googleId?: string
     provider: "credentials" | "google"
     role: "admin"

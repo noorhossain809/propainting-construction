@@ -16,7 +16,7 @@ const seedAdmin = async () => {
             process.exit(0)
         }
 
-        // bcrypt.hash() এখানে করা হচ্ছে না — model এর pre("save") hook নিজে hash করে দেবে
+        // No bcrypt.hash() here — the model's pre("save") hook hashes it
         await User.create({
             name: "Admin",
             email: "noorhossainvip809@gmail.com",

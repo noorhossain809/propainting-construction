@@ -3,20 +3,21 @@ import { Schema, model, Document } from "mongoose"
 export interface IService extends Document {
     title: string
     slug: string
-    shortDescription: string        // Homepage card এ দেখানোর জন্য ছোট বর্ণনা
-    subtitle: string                // Hero section এর নিচের লাইন
+    shortDescription: string        // Short description shown on the homepage card
+    subtitle: string                // Line under the hero section
     heroImage: {
         url: string
         alt: string
     }
-    contentImage: {                 // "Our Approach" সেকশনের ছবি
+    contentImage: {                 // Image for the "Our Approach" section
         url: string
         alt: string
     }
-    contentTitle: string            // যেমন: "Our Approach to Professional Painting in NYC"
-    contentDescription: string      // পুরো paragraph(s), \n দিয়ে multiple para আলাদা
-    order: number                   // homepage carousel এ sequence
-    isActive: boolean               // চাইলে সাইটে hide/show করা যাবে
+    contentTitle: string            // e.g. "Our Approach to Professional Painting in NYC"
+    contentDescription: string      // Full paragraph(s); separate multiple paragraphs with 
+
+    order: number                   // Sequence in the homepage carousel
+    isActive: boolean               // Optionally show/hide on the site
     seo?: {
         metaTitle?: string
         metaDescription?: string

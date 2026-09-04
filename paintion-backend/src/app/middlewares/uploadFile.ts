@@ -16,14 +16,14 @@
 
 import multer from "multer"
 import { CloudinaryStorage } from "multer-storage-cloudinary"
-import cloudinary from "../../config/cloudinary" // path আপনার প্রজেক্ট অনুযায়ী adjust করুন
+import cloudinary from "../../config/cloudinary" // adjust the path to your project
 
 const storage = new CloudinaryStorage({
     cloudinary,
     params: {
         folder: "propaint-construction",
         allowed_formats: ["jpg", "jpeg", "png", "webp"],
-    } as any, // TS type mismatch হলে "as any" রাখুন, লাইব্রেরির known issue
+    } as any, // keep "as any" for the TS type mismatch (known library issue)
 })
 
 export const upload = multer({ storage })

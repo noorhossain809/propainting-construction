@@ -288,7 +288,7 @@ export function ProjectForm() {
     setForm((prev) => ({ ...prev, [field]: value }))
   }
 
-  // slug auto-generate title থেকে, যদি user নিজে থেকে edit না করে
+  // auto-generate slug from title unless the user edits it manually
   const [slugTouched, setSlugTouched] = React.useState(false)
   React.useEffect(() => {
     if (!slugTouched) {
@@ -307,11 +307,11 @@ export function ProjectForm() {
   setError(null)
 
   if (!form.title || !form.slug || !form.projectType || !form.category || !form.description) {
-    setError("Title, Slug, Project Type, Category আর Description আবশ্যক।")
+    setError("Title, Slug, Project Type, Category and Description are required.")
     return
   }
   if (!mainImage) {
-    setError("Main Image আপলোড করা আবশ্যক।")
+    setError("Main Image is required.")
     return
   }
 
@@ -329,10 +329,10 @@ export function ProjectForm() {
   if (form.challenge) formData.append("challenge", form.challenge)
   if (form.solution) formData.append("solution", form.solution)
 
-  // results — backend .split("\n") করছে, তাই plain newline string পাঠাতে হবে
+  // results — backend splits on newlines, so send a plain multiline string
   formData.append("results", form.results)
 
-  // testimonial — JSON string হিসেবে (backend parseJSONField করছে)
+  // testimonial — as a JSON string (backend runs parseJSONField)
   if (form.testimonialText) {
     formData.append(
       "testimonial",
@@ -344,7 +344,7 @@ export function ProjectForm() {
     )
   }
 
-  // seo — JSON string হিসেবে
+  // seo — as a JSON string
   formData.append(
     "seo",
     JSON.stringify({
@@ -357,8 +357,8 @@ export function ProjectForm() {
     })
   )
 
-  // mainImage — ⚠️ এই অংশ middleware কনফার্ম হওয়া পর্যন্ত temporary
-  // ধরে নিচ্ছি raw file "mainImage" field নামে যাচ্ছে + alt টেক্সট আলাদা পাঠাচ্ছি
+  // mainImage — temporary until the middleware is confirmed
+  // assuming the raw file goes as the "mainImage" field + alt text sent separately
   formData.append("mainImage", mainImage)
   if (form.altText) formData.append("mainImageAlt", form.altText)
 
@@ -370,7 +370,7 @@ export function ProjectForm() {
     router.push("/our-projects")
   } catch (err) {
     console.error(err)
-    setError("প্রজেক্ট সেভ করতে সমস্যা হয়েছে। আবার চেষ্টা করুন।")
+    setError("Something went wrong saving the project. Please try again.")
   }
 }
 
@@ -524,7 +524,7 @@ export function ProjectForm() {
               onChange={(e) => setGallery(e.target.files ? Array.from(e.target.files) : [])}
             />
             {gallery.length > 0 && (
-              <p className="text-xs text-muted-foreground">{gallery.length}টা ছবি নির্বাচন করা হয়েছে</p>
+              <p className="text-xs text-muted-foreground">{gallery.length} image(s) selected</p>
             )}
           </div>
         </CardContent>

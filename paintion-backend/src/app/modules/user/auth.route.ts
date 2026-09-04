@@ -7,7 +7,7 @@ import auth from "../../middlewares/auth"
 const router = express.Router()
 
 router.post("/login", AuthController.login)
-router.post("/google", AuthController.googleLogin)   // ← যোগ করুন
+router.post("/google", AuthController.googleLogin)
 router.post("/logout", AuthController.logout)
 router.get("/me", auth(), AuthController.getMe)
 

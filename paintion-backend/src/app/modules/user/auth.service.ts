@@ -42,7 +42,7 @@ const loginUser = async (payload: { email: string; password: string }) => {
 const googleLogin = async (idToken: string) => {
 
     console.log("Backend GOOGLE_CLIENT_ID:", process.env.GOOGLE_CLIENT_ID)
-    // Google থেকে পাওয়া ID token verify করা
+    // Verify the ID token received from Google
     const ticket = await googleClient.verifyIdToken({
         idToken,
         audience: process.env.GOOGLE_CLIENT_ID,
@@ -53,8 +53,8 @@ const googleLogin = async (idToken: string) => {
         throw new ApiError(httpStatus.UNAUTHORIZED, "Invalid Google token")
     }
 
-    // ⚠️ গুরুত্বপূর্ণ: শুধু আগে থেকে database এ থাকা admin email হলেই login হবে
-    // নতুন কেউ Google দিয়ে auto-signup করতে পারবে না
+    // Important: only emails already in the database (admins) may log in
+    // New users cannot auto-sign-up via Google
     const user = await User.findOne({ email: payload.email.toLowerCase() })
 
     if (!user) {
@@ -64,7 +64,7 @@ const googleLogin = async (idToken: string) => {
         )
     }
 
-    // প্রথমবার Google দিয়ে login করলে googleId লিংক করে দাও
+    // On first Google login, link the googleId
     if (!user.googleId) {
         user.googleId = payload.sub
         user.provider = "google"

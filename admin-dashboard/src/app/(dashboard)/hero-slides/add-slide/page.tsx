@@ -274,8 +274,8 @@ export default function AddHeroSlidePage() {
                     placeholder="e.g., https://www.youtube.com/watch?v=... or a direct .mp4 link"
                   />
                   <p className="mt-1 text-xs text-slate-400">
-                    YouTube, Vimeo embed link, বা direct .mp4 file URL দিতে
-                    পারেন।
+                    You can provide a YouTube/Vimeo embed link or a direct
+                    .mp4 file URL.
                   </p>
                 </Field>
               )}

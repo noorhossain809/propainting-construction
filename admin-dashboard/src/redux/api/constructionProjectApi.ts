@@ -48,7 +48,7 @@ const constructionProjectApi = baseApi.injectEndpoints({
             providesTags: (result, error, id) => [{ type: "Project", id }],
         }),
 
-        // CREATE project (FormData, কারণ file upload আছে)
+        // CREATE project (FormData, because it includes file upload)
         createProject: builder.mutation<IProject, FormData>({
             query: (formData) => ({
                 url: "/construction",

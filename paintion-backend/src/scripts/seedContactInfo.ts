@@ -1,4 +1,4 @@
-// src/scripts/seedContactInfo.ts — একবার চালিয়ে ডিলিট করে দিন
+// src/scripts/seedContactInfo.ts — run once, then delete
 import mongoose from "mongoose"
 import dotenv from "dotenv"
 import ContactInfo from "../app/modules/contactInfo/contactInfo.model"
@@ -24,7 +24,7 @@ const seedContactInfo = async () => {
         }
 
         if (existing) {
-            // আগে থেকে document থাকলে সেটাই আপডেট করে দাও, duplicate না বানিয়ে
+            // If a document already exists, update it instead of creating a duplicate
             await ContactInfo.findByIdAndUpdate(existing._id, contactData, {
                 new: true,
                 runValidators: true,

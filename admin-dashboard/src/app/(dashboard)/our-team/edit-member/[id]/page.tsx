@@ -83,7 +83,7 @@ export default function EditTeamMemberPage() {
     formData.append("isActive", String(form.isActive))
     if (form.imageAlt) formData.append("imageAlt", form.imageAlt)
 
-    // নতুন ছবি দিলে তবেই পাঠান, না দিলে পুরনোটাই থাকবে
+    // Only send a new image if one is provided; otherwise keep the old one
     if (image) {
       formData.append("image", image)
     }

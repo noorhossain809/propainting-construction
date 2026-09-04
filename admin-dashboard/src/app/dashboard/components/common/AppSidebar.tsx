@@ -75,7 +75,7 @@ const SidebarNavigation = ({ isMobile = false }: { isMobile?: boolean }) => {
                   </span>
                 )}
               </div>
-              {/* conditional unmount এর বদলে width+opacity animate করা হচ্ছে */}
+              {/* animate width+opacity instead of conditionally unmounting */}
               <span
                 className={`ml-3 flex flex-1 items-center justify-between truncate overflow-hidden whitespace-nowrap transition-all duration-300 ${
                   shouldShowText ? "max-w-[160px] opacity-100" : "max-w-0 opacity-0 ml-0"
@@ -102,7 +102,7 @@ export function AppSidebar() {
 
   return (
     <>
-      {/* ডেস্কটপের জন্য সাইডবার (md এবং বড় স্ক্রিনে দেখা যাবে) */}
+      {/* Desktop sidebar (visible on md and larger screens) */}
       <aside
   className={`hidden md:flex flex-col flex-shrink-0 border-r fixed inset-y-0 left-0 z-20 transition-[width] duration-300 ease-in-out ${
     open ? "w-64" : "w-20"
@@ -111,12 +111,12 @@ export function AppSidebar() {
   <SidebarNavigation />
 </aside>
 
-      {/* মোবাইলের জন্য ড্রয়ার (md এর চেয়ে ছোট স্ক্রিনে কাজ করবে) */}
+      {/* Mobile drawer (for screens smaller than md) */}
       <div className="md:hidden">
         <Sheet open={openMobile} onOpenChange={setOpenMobile}>
           <SheetContent 
             side="left" 
-            className="p-0 w-72 bg-white duration-300" // ✅ শুধু এই ক্লাসটি যোগ করা হয়েছে
+            className="p-0 w-72 bg-white duration-300"
           >
             <SidebarNavigation isMobile={true} />
           </SheetContent>

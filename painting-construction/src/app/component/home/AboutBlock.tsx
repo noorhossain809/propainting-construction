@@ -102,7 +102,7 @@ export default function AboutBlock() {
                   className="group relative overflow-hidden rounded-md bg-amber-500 lg:px-6 px-3 lg:py-6 py-3 text-white text-base hover:bg-amber-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500/40"
                 >
                   <span
-                    className="pointer-events-none absolute inset-0 left-0 w-0 bg-black transition-[width] duration-400 ease-out group-hover:w-full"
+                    className="pointer-events-none absolute inset-0 left-0 w-0 bg-[#0B2653] transition-[width] duration-400 ease-out group-hover:w-full"
                     aria-hidden="true"
                   />
                   <span className="relative z-10 flex items-center gap-1.5 transition-colors duration-300 group-hover:text-white">
@@ -174,7 +174,7 @@ export default function AboutBlock() {
             ].map(
               (
                 image,
-                idx // 'src' এর পরিবর্তে 'image' ব্যবহার করা হয়েছে
+                idx // use the image object instead of a raw src
               ) => (
                 <motion.div
                   key={idx}
@@ -182,10 +182,10 @@ export default function AboutBlock() {
                   variants={itemVariants}
                 >
                   <Image
-                    src={image.src} // image.src ব্যবহার করুন
+                    src={image.src} // use image.src
                     width={1000}
                     height={500}
-                    alt={image.alt} // image.alt ব্যবহার করুন
+                    alt={image.alt} // use image.alt
                     className="w-full h-72 object-cover transform transition-transform duration-500 ease-in-out hover:scale-105"
                   />
                 </motion.div>

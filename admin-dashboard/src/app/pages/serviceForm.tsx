@@ -156,10 +156,10 @@ export default function AddServicePage() {
               rows={2}
               value={form.shortDescription}
               onChange={(e) => handleChange("shortDescription", e.target.value)}
-              placeholder="Homepage সার্ভিস কার্ডে যেটুকু দেখাবে..."
+              placeholder="What appears on the homepage service card..."
             />
           </Field>
-          <Field label="Subtitle (Hero section এর নিচে)" full>
+          <Field label="Subtitle (under the Hero section)" full>
             <textarea
               className={inputClass}
               rows={2}

@@ -10,7 +10,7 @@ export function DashboardContent({ children }: { children: React.ReactNode }) {
   const { open } = useSidebar();
 
   return (
-    // এই main এলিমেন্টটি সাইডবারের অবস্থা অনুযায়ী margin পরিবর্তন করবে
+    // This main element shifts its margin based on the sidebar state
     <main
       className={`flex flex-1 flex-col transition-[margin-left] duration-300 ease-in-out ${
         open ? "md:ml-64" : "md:ml-20"

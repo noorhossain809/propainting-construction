@@ -1,8 +1,8 @@
 import mongoose, { Document, models, Schema } from 'mongoose';
 
-// --- সাব-স্কিমা (Nested Objects) ---
+// --- Sub-schemas (Nested Objects) ---
 
-// Testimonial-এর জন্য সাব-স্কিমা
+// Sub-schema for the Testimonial
 const testimonialSchema = new Schema({
   text: {
     type: String,
@@ -20,7 +20,7 @@ const testimonialSchema = new Schema({
   },
 });
 
-// SEO-এর জন্য সাব-স্কিমা
+// Sub-schema for SEO
 const seoSchema = new Schema({
   metaTitle: {
     type: String,
@@ -28,7 +28,7 @@ const seoSchema = new Schema({
   metaDescription: {
     type: String,
   },
-  // ফর্মে কমা বা নতুন লাইন দিয়ে ইনপুট নিলেও, ডাটাবেসে অ্যারে হিসেবে রাখাই ভালো
+  // Even if entered comma/newline-separated in the form, store as an array in the DB
   keywords: [
     {
       type: String,
@@ -36,9 +36,9 @@ const seoSchema = new Schema({
   ],
 });
 
-// --- প্রধান প্রজেক্ট স্কিমা ---
+// --- Main Project schema ---
 
-// TypeScript-এর জন্য Interface (Optional but recommended)
+// Interface for TypeScript (optional but recommended)
 export type IProject = {
   title: string;
   slug: string;
@@ -52,12 +52,12 @@ export type IProject = {
     url: string;
     alt: string;
   };
-  gallery: string[]; // শুধু ইমেজ URL গুলোর অ্যারে
+  gallery: string[]; // Array of image URLs only
   challenge?: string;
   solution?: string;
-  results: string[]; // প্রতিটি রেজাল্ট অ্যারের একটি আইটেম হবে
-  testimonial?: typeof testimonialSchema; // ঐচ্ছিক
-  seo?: typeof seoSchema; // ঐচ্ছিক
+  results: string[]; // Each result is one array item
+  testimonial?: typeof testimonialSchema; // optional
+  seo?: typeof seoSchema; // optional
   createdAt: Date;
   updatedAt: Date;
 } & Document
@@ -77,7 +77,7 @@ const projectSchema = new Schema<IProject>(
       lowercase: true,
       trim: true,
     },
-    // 'type' একটি Mongoose-এর নিজস্ব কি-ওয়ার্ড, তাই 'projectType' ব্যবহার করা ভালো
+    // 'type' is a reserved Mongoose keyword, so use 'projectType' instead
     projectType: {
       type: String,
       enum: ['Interior Painting', 'Exterior Painting', 'Commercial Painting', 'Renovation'],
@@ -103,14 +103,14 @@ const projectSchema = new Schema<IProject>(
     },
 
     // --- Images ---
-    // ফাইল আপলোডের পর আপনি শুধু URL এবং alt টেক্সট সেভ করবেন
+    // After file upload, store only the URL and alt text
      mainImage: {
        url: { type: String, required: [true, 'Main image URL is required'] },
        alt: { type: String, required: [true, 'Main image alt text is required'] },
      },
     gallery: [
       {
-        type: String, // এখানে ইমেজ URL গুলোর অ্যারে থাকবে
+        type: String, // holds the array of image URLs
       },
     ],
 
@@ -121,7 +121,7 @@ const projectSchema = new Schema<IProject>(
     solution: {
       type: String,
     },
-    // ফর্মে একটি textarea থাকলেও, API-তে সেভ করার আগে একে new line ('\n') দিয়ে split করে অ্যারে বানিয়ে ফেলা ভালো
+    // Though a single textarea in the form, split on newlines into an array before saving
     results: [
       {
         type: String,
@@ -131,21 +131,21 @@ const projectSchema = new Schema<IProject>(
     // --- Testimonial (Optional) ---
     testimonial: {
       type: testimonialSchema,
-      required: false, // পুরো সেকশনটি ঐচ্ছিক
+      required: false, // the whole section is optional
     },
 
     // --- SEO (Optional) ---
     seo: {
       type: seoSchema,
-      required: false, // পুরো সেকশনটি ঐচ্ছিক
+      required: false, // the whole section is optional
     },
   },
   {
-    timestamps: true, // createdAt এবং updatedAt অটোমেটিক যোগ করবে
+    timestamps: true, // automatically adds createdAt and updatedAt
   }
 );
 
-// ডুপ্লিকেট মডেল তৈরি হওয়া বন্ধ করার জন্য
+// Prevent duplicate model compilation
 const Project = models.Project || mongoose.model<IProject>('Project', projectSchema);
 
 export default Project;

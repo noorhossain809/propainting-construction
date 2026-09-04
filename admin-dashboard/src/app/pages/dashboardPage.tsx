@@ -17,7 +17,7 @@ const Dashboard = () => {
         }
     }
 
-    // stats গণনা (তোমার schema-তে status field না থাকলে category দিয়ে approximate করলাম — নিচে নোট দেখো)
+    // compute stats (no status field in the schema, so approximated by category)
     const total = projects?.length || 0
     const ended = projects?.filter((p) => !!p.completedDate).length || 0
     const running = total - ended

@@ -20,7 +20,7 @@ type FormState = {
   description: string
   location: string
   duration: string
-  completedDate: string // yyyy-mm-dd, native date input এর জন্য
+  completedDate: string // yyyy-mm-dd, for the native date input
   challenge: string
   solution: string
   results: string
@@ -67,7 +67,7 @@ export default function EditProjectPage() {
   const [error, setError] = React.useState<string | null>(null)
   const [hydrated, setHydrated] = React.useState(false)
 
-  // fetched data দিয়ে ফর্ম pre-fill — শুধু একবার
+  // pre-fill the form with fetched data — only once
   React.useEffect(() => {
     if (project && !hydrated) {
       setForm({
@@ -105,7 +105,7 @@ export default function EditProjectPage() {
     setError(null)
 
     if (!form.title || !form.slug || !form.projectType || !form.category || !form.description) {
-      setError("Title, Slug, Project Type, Category আর Description আবশ্যক।")
+      setError("Title, Slug, Project Type, Category and Description are required.")
       return
     }
 
@@ -145,13 +145,13 @@ export default function EditProjectPage() {
       })
     )
 
-    // নতুন main image দিলে তবেই পাঠাও, না দিলে পুরনোটাই থাকবে (backend else-branch handle করছে)
+    // Only send a new main image if provided; otherwise keep the old one (backend else-branch handles it)
     if (mainImage) {
       formData.append("mainImage", mainImage)
     }
     if (form.altText) formData.append("mainImageAlt", form.altText)
 
-    // নতুন gallery ফাইল দিলে পুরনো gallery পুরোপুরি replace হবে
+    // Providing new gallery files fully replaces the old gallery
     gallery.forEach((file) => formData.append("gallery", file))
 
     try {
@@ -159,7 +159,7 @@ export default function EditProjectPage() {
       router.push(`/our-projects/${id}`)
     } catch (err) {
       console.error(err)
-      setError("প্রজেক্ট আপডেট করতে সমস্যা হয়েছে। আবার চেষ্টা করুন।")
+      setError("Something went wrong updating the project. Please try again.")
     }
   }
 
@@ -174,7 +174,7 @@ export default function EditProjectPage() {
   if (isError || !project) {
     return (
       <div className="rounded-xl border border-red-200 bg-red-50 px-6 py-10 text-center">
-        <p className="font-medium text-red-700">প্রজেক্টটি পাওয়া যায়নি</p>
+        <p className="font-medium text-red-700">Project not found</p>
       </div>
     )
   }
@@ -324,7 +324,7 @@ export default function EditProjectPage() {
             />
             {gallery.length > 0 && (
               <p className="mt-1 text-xs text-amber-600">
-                {gallery.length}টা নতুন ছবি নির্বাচিত — সেভ করলে পুরনো gallery মুছে এগুলো বসবে।
+                {gallery.length} new image(s) selected — saving replaces the old gallery.
               </p>
             )}
           </Field>

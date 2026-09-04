@@ -94,7 +94,7 @@ const updateHeroSlide = catchAsync(async (req: Request, res: Response) => {
 
     if (req.body.mediaType !== undefined) {
         payload.mediaType = req.body.mediaType
-        // মিডিয়া টাইপ ভিন্ন হয়ে গেলে অপ্রাসঙ্গিক field মুছে দাও
+        // If the media type changes, remove the now-irrelevant fields
         if (req.body.mediaType === "video") {
             payload.videoUrl = req.body.videoUrl
         }

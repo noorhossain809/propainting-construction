@@ -61,7 +61,7 @@ const createProject = catchAsync(async (req: Request, res: Response) => {
         ...req.body,
         mainImage: mainImageFile
             ? {
-                  url: mainImageFile.path,       // Cloudinary URL, multer-storage-cloudinary থেকে
+                  url: mainImageFile.path,       // Cloudinary URL from multer-storage-cloudinary
                   alt: req.body.mainImageAlt || req.body.title || "",
               }
             : undefined,
@@ -120,7 +120,7 @@ const updateProject = catchAsync(async (req: Request, res: Response) => {
             alt: req.body.mainImageAlt || req.body.title || "",
         }
     } else if (req.body.mainImage !== undefined) {
-        // যদি নতুন file না দেয়, কিন্তু alt টেক্সট বা অন্য কিছু body তে থাকে
+        // If no new file is provided but alt text or other body fields are present
         payload.mainImage = parseJSONField(req.body.mainImage)
     }
 

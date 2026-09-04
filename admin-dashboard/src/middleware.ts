@@ -1,4 +1,4 @@
-// middleware.ts (project root, app/ এর বাইরে)
+// middleware.ts (project root, outside app/)
 import { NextRequest, NextResponse } from "next/server"
 
 export function middleware(request: NextRequest) {

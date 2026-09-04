@@ -4,13 +4,13 @@
 
 import { SidebarTrigger, useSidebar } from '@/components/ui/sidebar';
 import { Button } from '@/components/ui/button';
-import { Menu, Bell } from 'lucide-react'; // <-- Menu আইকন ইম্পোর্ট করুন
+import { Menu, Bell } from 'lucide-react';
 import React from 'react';
 import Link from 'next/link';
 import { useGetAllContactMessagesQuery } from '@/redux/api/contactMessageApi';
 
 export const Header = () => {
-  const { toggleSidebar } = useSidebar(); // <-- toggleSidebar হুকটি ব্যবহার করবো
+  const { toggleSidebar } = useSidebar();
 
   // Poll so the bell badge updates when new messages arrive from the site.
   const { data: messages } = useGetAllContactMessagesQuery(undefined, {
@@ -22,12 +22,12 @@ export const Header = () => {
 
   return (
     <header className="flex h-16 items-center border-b bg-white px-4 md:px-6 sticky top-0 z-10">
-      {/* ডেস্কটপের জন্য ট্রিগার (আগের মতোই) */}
+      {/* Desktop trigger */}
       <div className="hidden md:flex">
         <SidebarTrigger />
       </div>
 
-      {/* মোবাইলের জন্য ড্রয়ার ট্রিগার (হ্যামবার্গার আইকন) */}
+      {/* Mobile drawer trigger (hamburger icon) */}
       <div className="md:hidden">
         <Button onClick={toggleSidebar} variant="ghost" size="icon">
           <Menu className="h-6 w-6" />
@@ -36,7 +36,7 @@ export const Header = () => {
       </div>
       
       <div className="ml-4">
-        {/* এখানে হেডারের অন্যান্য কন্টেন্ট থাকবে */}
+        {/* Other header content goes here */}
         <h4>Construction</h4>
       </div>
 

@@ -49,7 +49,7 @@ export default function ProjectPage() {
     })
   }, [projects, search, categoryFilter])
 
-  // মেনুর বাইরে ক্লিক করলে বন্ধ হবে
+  // close when clicking outside the menu
   React.useEffect(() => {
     const closeMenu = () => setOpenMenuId(null)
     if (openMenuId) {
@@ -135,8 +135,8 @@ export default function ProjectPage() {
       {/* Error state */}
       {isError && (
         <div className="rounded-xl border border-red-200 bg-red-50 px-6 py-10 text-center">
-          <p className="font-medium text-red-700">প্রজেক্টগুলো লোড করা যায়নি</p>
-          <p className="mt-1 text-sm text-red-600">দয়া করে আবার চেষ্টা করুন।</p>
+          <p className="font-medium text-red-700">Failed to load projects</p>
+          <p className="mt-1 text-sm text-red-600">Please try again.</p>
         </div>
       )}
 
@@ -144,8 +144,8 @@ export default function ProjectPage() {
       {!isLoading && !isError && projects && projects.length === 0 && (
         <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-slate-300 bg-white px-6 py-16 text-center">
           <ImageOff className="h-10 w-10 text-slate-300" />
-          <p className="mt-4 font-medium text-slate-700">এখনো কোনো প্রজেক্ট যোগ করা হয়নি</p>
-          <p className="mt-1 text-sm text-slate-500">প্রথম প্রজেক্ট যোগ করে পোর্টফোলিও শুরু করুন।</p>
+          <p className="mt-4 font-medium text-slate-700">No projects added yet</p>
+          <p className="mt-1 text-sm text-slate-500">Add your first project to start the portfolio.</p>
           <Link href="/our-project/add-project" className="mt-4">
             <button className="flex items-center gap-2 rounded-lg bg-amber-500 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-amber-600">
               <Plus className="h-4 w-4" />
@@ -176,7 +176,7 @@ export default function ProjectPage() {
         key={project._id}
         className="group relative overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition hover:shadow-md"
       >
-        {/* Action menu — Link এর বাইরে, তাই কোনো nesting সমস্যা নেই */}
+        {/* Action menu — outside the Link, so no nesting issues */}
         <div className="absolute right-2 top-2 z-20">
           <button
             onClick={() =>
@@ -213,7 +213,7 @@ export default function ProjectPage() {
           )}
         </div>
 
-        {/* এই Link টাই শুধু details page এ নিয়ে যায় — dropdown এখন এর বাইরে */}
+        {/* This Link goes to the details page — the dropdown is now outside it */}
         <Link href={`/our-projects/${project._id}`} className="block">
           <div className="relative aspect-[4/3] overflow-hidden bg-slate-100">
             {project.mainImage?.url ? (

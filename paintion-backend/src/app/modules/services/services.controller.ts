@@ -28,7 +28,7 @@ const createService = catchAsync(async (req: Request, res: Response) => {
         return sendResponse(res, {
             statusCode: httpStatus.BAD_REQUEST,
             success: false,
-            message: "Hero Image এবং Content Image দুটোই আবশ্যক",
+            message: "Both Hero Image and Content Image are required",
             data: null,
         })
     }

@@ -13,7 +13,7 @@ export const baseApi = createApi({
     reducerPath: "api",
     baseQuery: fetchBaseQuery({
         baseUrl: `${process.env.NEXT_PUBLIC_API_URL}/api/v1`,
-        // যদি cookie-based auth থাকে (তোমার backend-এ cookieParser দেখলাম)
+        // cookie-based auth (the backend uses cookieParser)
         credentials: "include",
         prepareHeaders: (headers) => {
             const token = getCookie("accessToken")
