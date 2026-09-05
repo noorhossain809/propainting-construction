@@ -92,6 +92,7 @@ export default function LoginPage() {
               onSuccess={handleGoogleSuccess}
               onError={() => setError("Google sign-in failed. Please try again.")}
               width="320"
+              locale="en"
             />
           )}
         </div>

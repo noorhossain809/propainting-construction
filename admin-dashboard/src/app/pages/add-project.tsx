@@ -217,6 +217,7 @@
 "use client"
 
 import * as React from "react"
+import BackButton from "@/components/ui/BackButton"
 import { useRouter } from "next/navigation"
 import { CalendarIcon, Loader2 } from "lucide-react"
 import { format } from "date-fns"
@@ -376,6 +377,7 @@ export function ProjectForm() {
 
   return (
     <form onSubmit={handleSubmit} className="container mx-auto space-y-8">
+      <BackButton href="/our-projects" label="Back to Projects" />
       {error && (
         <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
           {error}

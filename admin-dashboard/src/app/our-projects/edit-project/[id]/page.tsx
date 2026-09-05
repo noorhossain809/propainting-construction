@@ -2,6 +2,7 @@
 "use client"
 
 import * as React from "react"
+import BackButton from "@/components/ui/BackButton"
 import { useParams, useRouter } from "next/navigation"
 import { Loader2, } from "lucide-react"
 import Image from "next/image"
@@ -182,6 +183,7 @@ export default function EditProjectPage() {
   return (
     <DashboardLayout>
         <form onSubmit={handleSubmit} className="container mx-auto space-y-6">
+          <BackButton href="/our-projects" label="Back to Projects" />
       <div>
         <p className="text-xs font-semibold uppercase tracking-wide text-amber-600">Edit</p>
         <h1 className="mt-1 text-2xl font-bold text-slate-900">Edit Project</h1>

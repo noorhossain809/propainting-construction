@@ -2,6 +2,7 @@
 "use client"
 
 import * as React from "react"
+import BackButton from "@/components/ui/BackButton"
 import { useParams, useRouter } from "next/navigation"
 import Image from "next/image"
 import { Loader2 } from "lucide-react"
@@ -115,6 +116,7 @@ export default function EditTeamMemberPage() {
 
   return (
     <form onSubmit={handleSubmit} className="container mx-auto space-y-6">
+      <BackButton href="/our-team" label="Back to Team" />
       <div>
         <p className="text-xs font-semibold uppercase tracking-wide text-amber-600">Edit</p>
         <h1 className="mt-1 text-2xl font-bold text-slate-900">Edit Team Member</h1>

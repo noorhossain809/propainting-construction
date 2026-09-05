@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import BackButton from "@/components/ui/BackButton"
 import { useParams, useRouter } from "next/navigation";
 import { Loader2 } from "lucide-react";
 import Image from "next/image";
@@ -159,6 +160,7 @@ export default function EditServicePage() {
   return (
     <DashboardLayout>
       <form onSubmit={handleSubmit} className="container mx-auto space-y-6">
+        <BackButton href="/our-services" label="Back to Services" />
         <div>
           <p className="text-xs font-semibold uppercase tracking-wide text-amber-600">
             Edit

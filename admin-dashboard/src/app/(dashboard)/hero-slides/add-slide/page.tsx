@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import BackButton from "@/components/ui/BackButton"
 import { useRouter } from "next/navigation";
 import { Loader2 } from "lucide-react";
 
@@ -114,6 +115,7 @@ export default function AddHeroSlidePage() {
 
   return (
     <form onSubmit={handleSubmit} className="container mx-auto space-y-6">
+      <BackButton href="/hero-slides" label="Back to Hero Slides" />
       <div>
         <p className="text-xs font-semibold uppercase tracking-wide text-amber-600">
           Homepage
