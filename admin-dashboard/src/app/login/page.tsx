@@ -92,7 +92,9 @@ export default function LoginPage() {
               onSuccess={handleGoogleSuccess}
               onError={() => setError("Google sign-in failed. Please try again.")}
               width="320"
-              locale="en"
+              // `locale` is a valid GSI button option but missing from the
+              // package's types, so it's passed via a cast spread.
+              {...({ locale: "en" } as Record<string, string>)}
             />
           )}
         </div>
