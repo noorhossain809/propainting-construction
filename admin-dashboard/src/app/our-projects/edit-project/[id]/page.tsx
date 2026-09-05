@@ -12,7 +12,12 @@ import {
   useUpdateProjectMutation,
 } from "@/redux/api/constructionProjectApi"
 import DashboardLayout from "@/app/dashboard/layout"
-import { PROJECT_CATEGORIES, PROJECT_CATEGORY_VALUES } from "@/lib/categories"
+import {
+  PROJECT_CATEGORIES,
+  PROJECT_CATEGORY_VALUES,
+  PROJECT_TYPES,
+  PROJECT_TYPE_VALUES,
+} from "@/lib/categories"
 
 type FormState = {
   title: string
@@ -70,6 +75,8 @@ export default function EditProjectPage() {
   const [hydrated, setHydrated] = React.useState(false)
   // Tracks the category dropdown choice; "others" reveals a custom input.
   const [categoryChoice, setCategoryChoice] = React.useState<string>("")
+  // Same pattern for project type.
+  const [projectTypeChoice, setProjectTypeChoice] = React.useState<string>("")
 
   // pre-fill the form with fetched data — only once
   React.useEffect(() => {
@@ -96,10 +103,14 @@ export default function EditProjectPage() {
         keywords: (project.seo?.keywords ?? []).join(", "),
         altText: project.mainImage?.alt ?? "",
       })
-      // A stored category not in the preset list is a custom ("Others") value.
+      // A stored value not in the preset list is a custom ("Others") value.
       const cat = project.category ?? ""
       setCategoryChoice(
         PROJECT_CATEGORY_VALUES.includes(cat) ? cat : cat ? "others" : ""
+      )
+      const pt = project.projectType ?? ""
+      setProjectTypeChoice(
+        PROJECT_TYPE_VALUES.includes(pt) ? pt : pt ? "others" : ""
       )
       setHydrated(true)
     }
@@ -225,15 +236,29 @@ export default function EditProjectPage() {
           <Field label="Project Type">
             <select
               className={inputClass}
-              value={form.projectType}
-              onChange={(e) => handleChange("projectType", e.target.value)}
+              value={projectTypeChoice}
+              onChange={(e) => {
+                const v = e.target.value
+                setProjectTypeChoice(v)
+                handleChange("projectType", v === "others" ? "" : v)
+              }}
             >
               <option value="">Select a type</option>
-              <option value="Interior Painting">Interior Painting</option>
-              <option value="Exterior Painting">Exterior Painting</option>
-              <option value="Commercial Painting">Commercial Painting</option>
-              <option value="Renovation">Renovation</option>
+              {PROJECT_TYPES.map((t) => (
+                <option key={t.value} value={t.value}>
+                  {t.label}
+                </option>
+              ))}
+              <option value="others">Others</option>
             </select>
+            {projectTypeChoice === "others" && (
+              <input
+                className={`${inputClass} mt-2`}
+                placeholder="Enter custom project type"
+                value={form.projectType}
+                onChange={(e) => handleChange("projectType", e.target.value)}
+              />
+            )}
           </Field>
           <Field label="Category">
             <select

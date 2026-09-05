@@ -233,7 +233,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
 import { useCreateProjectMutation } from "@/redux/api/constructionProjectApi"
-import { PROJECT_CATEGORIES } from "@/lib/categories"
+import { PROJECT_CATEGORIES, PROJECT_TYPES } from "@/lib/categories"
 
 
 type FormState = {
@@ -283,6 +283,8 @@ export function ProjectForm() {
   const [form, setForm] = React.useState<FormState>(initialState)
   // Tracks the category dropdown choice; "others" reveals a custom input.
   const [categoryChoice, setCategoryChoice] = React.useState<string>("")
+  // Same pattern for project type.
+  const [projectTypeChoice, setProjectTypeChoice] = React.useState<string>("")
   const [completedDate, setCompletedDate] = React.useState<Date>()
   const [mainImage, setMainImage] = React.useState<File | null>(null)
   const [gallery, setGallery] = React.useState<File[]>([])
@@ -417,17 +419,32 @@ export function ProjectForm() {
           </div>
           <div className="space-y-2 w-full">
             <Label htmlFor="type">Project Type</Label>
-            <Select value={form.projectType} onValueChange={(v) => handleChange("projectType", v)}>
-              <SelectTrigger id="type">
+            <Select
+              value={projectTypeChoice}
+              onValueChange={(v) => {
+                setProjectTypeChoice(v)
+                handleChange("projectType", v === "others" ? "" : v)
+              }}
+            >
+              <SelectTrigger id="type" className="w-full">
                 <SelectValue placeholder="Select a type" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="Interior Painting">Interior Painting</SelectItem>
-                <SelectItem value="Exterior Painting">Exterior Painting</SelectItem>
-                <SelectItem value="Commercial Painting">Commercial Painting</SelectItem>
-                <SelectItem value="Renovation">Renovation</SelectItem>
+                {PROJECT_TYPES.map((t) => (
+                  <SelectItem key={t.value} value={t.value}>
+                    {t.label}
+                  </SelectItem>
+                ))}
+                <SelectItem value="others">Others</SelectItem>
               </SelectContent>
             </Select>
+            {projectTypeChoice === "others" && (
+              <Input
+                placeholder="Enter custom project type"
+                value={form.projectType}
+                onChange={(e) => handleChange("projectType", e.target.value)}
+              />
+            )}
           </div>
           <div className="space-y-2">
             <Label htmlFor="category">Category</Label>
@@ -438,7 +455,7 @@ export function ProjectForm() {
                 handleChange("category", v === "others" ? "" : v)
               }}
             >
-              <SelectTrigger id="category">
+              <SelectTrigger id="category" className="w-full">
                 <SelectValue placeholder="Select a category" />
               </SelectTrigger>
               <SelectContent>

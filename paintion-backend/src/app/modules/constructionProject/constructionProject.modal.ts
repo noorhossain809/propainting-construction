@@ -42,7 +42,7 @@ const seoSchema = new Schema({
 export type IProject = {
   title: string;
   slug: string;
-  projectType: 'Interior Painting' | 'Exterior Painting' | 'Commercial Painting' | 'Renovation';
+  projectType: string;
   category: string;
   description: string;
   location?: string;
@@ -77,11 +77,12 @@ const projectSchema = new Schema<IProject>(
       lowercase: true,
       trim: true,
     },
-    // 'type' is a reserved Mongoose keyword, so use 'projectType' instead
+    // 'type' is a reserved Mongoose keyword, so use 'projectType' instead.
+    // Free-form so predefined types AND custom ("Others") values are allowed.
     projectType: {
       type: String,
-      enum: ['Interior Painting', 'Exterior Painting', 'Commercial Painting', 'Renovation'],
       required: [true, 'Project type is required'],
+      trim: true,
     },
     // Free-form so predefined categories AND custom ("Others") values are allowed.
     category: {

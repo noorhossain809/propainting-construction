@@ -4,7 +4,7 @@ export interface IProject {
     _id: string
     title: string
     slug: string
-    projectType: "Interior Painting" | "Exterior Painting" | "Commercial Painting" | "Renovation"
+    projectType: string
     category: string
     description: string
     location?: string

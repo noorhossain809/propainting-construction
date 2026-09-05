@@ -16,3 +16,17 @@ export const PROJECT_CATEGORIES = [
 export const PROJECT_CATEGORY_VALUES: string[] = PROJECT_CATEGORIES.map(
   (c) => c.value
 );
+
+// Predefined project types. "Others" lets an admin type a custom type.
+export const PROJECT_TYPES = [
+  { value: "Interior Painting", label: "Interior Painting" },
+  { value: "Exterior Painting", label: "Exterior Painting" },
+  { value: "Commercial Painting", label: "Commercial Painting" },
+  { value: "Renovation", label: "Renovation" },
+  { value: "Waterproofing", label: "Waterproofing" },
+  { value: "Wallpaper Hanging", label: "Wallpaper Hanging" },
+  { value: "Roofing", label: "Roofing" },
+  { value: "Steam Cleaning", label: "Steam Cleaning" },
+] as const;
+
+export const PROJECT_TYPE_VALUES: string[] = PROJECT_TYPES.map((t) => t.value);

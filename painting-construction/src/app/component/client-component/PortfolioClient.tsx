@@ -109,13 +109,20 @@ export default function PortfolioClient({ projects }: { projects: Project[] }) {
     }));
   }, [liveProjects, projects]);
 
-  // Tabs = preset categories + any custom ("Others") categories found in data.
+  // Tabs show ONLY categories that actually have projects (plus "All").
+  // A category tab appears once a project in that category exists.
   const categories = useMemo(() => {
+    const present = new Set(cards.map((c) => c.category).filter(Boolean));
     const presetValues = new Set(PRESET_CATEGORIES.map((c) => c.value));
-    const custom = [...new Set(cards.map((c) => c.category))]
-      .filter((v) => v && !presetValues.has(v))
+    // Preset categories that have at least one project, kept in preset order.
+    const presetPresent = PRESET_CATEGORIES.filter(
+      (c) => c.value !== "all" && present.has(c.value)
+    );
+    // Custom ("Others") categories present in the data.
+    const custom = [...present]
+      .filter((v) => !presetValues.has(v))
       .map((v) => ({ label: humanizeCategory(v), value: v }));
-    return [...PRESET_CATEGORIES, ...custom];
+    return [{ label: "All Projects", value: "all" }, ...presetPresent, ...custom];
   }, [cards]);
 
   const filtered = useMemo(() => {
