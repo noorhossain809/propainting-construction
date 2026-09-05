@@ -12,6 +12,7 @@ import {
   useUpdateProjectMutation,
 } from "@/redux/api/constructionProjectApi"
 import DashboardLayout from "@/app/dashboard/layout"
+import { PROJECT_CATEGORIES, PROJECT_CATEGORY_VALUES } from "@/lib/categories"
 
 type FormState = {
   title: string
@@ -67,6 +68,8 @@ export default function EditProjectPage() {
   const [gallery, setGallery] = React.useState<File[]>([])
   const [error, setError] = React.useState<string | null>(null)
   const [hydrated, setHydrated] = React.useState(false)
+  // Tracks the category dropdown choice; "others" reveals a custom input.
+  const [categoryChoice, setCategoryChoice] = React.useState<string>("")
 
   // pre-fill the form with fetched data — only once
   React.useEffect(() => {
@@ -93,6 +96,11 @@ export default function EditProjectPage() {
         keywords: (project.seo?.keywords ?? []).join(", "),
         altText: project.mainImage?.alt ?? "",
       })
+      // A stored category not in the preset list is a custom ("Others") value.
+      const cat = project.category ?? ""
+      setCategoryChoice(
+        PROJECT_CATEGORY_VALUES.includes(cat) ? cat : cat ? "others" : ""
+      )
       setHydrated(true)
     }
   }, [project, hydrated])
@@ -230,14 +238,29 @@ export default function EditProjectPage() {
           <Field label="Category">
             <select
               className={inputClass}
-              value={form.category}
-              onChange={(e) => handleChange("category", e.target.value)}
+              value={categoryChoice}
+              onChange={(e) => {
+                const v = e.target.value
+                setCategoryChoice(v)
+                handleChange("category", v === "others" ? "" : v)
+              }}
             >
               <option value="">Select a category</option>
-              <option value="interior">Interior</option>
-              <option value="exterior">Exterior</option>
-              <option value="commercial">Commercial</option>
+              {PROJECT_CATEGORIES.map((c) => (
+                <option key={c.value} value={c.value}>
+                  {c.label}
+                </option>
+              ))}
+              <option value="others">Others</option>
             </select>
+            {categoryChoice === "others" && (
+              <input
+                className={`${inputClass} mt-2`}
+                placeholder="Enter custom category"
+                value={form.category}
+                onChange={(e) => handleChange("category", e.target.value)}
+              />
+            )}
           </Field>
           <Field label="Description" full>
             <textarea

@@ -14,31 +14,29 @@ import { Project } from "@/app/data/projects";
 import { useGetAllProjectsQuery } from "@/redux/api/constructionProjectApi";
 
 // Types and Constants
-type Category =
-  | "all"
-  | "industrial"
-  | "interior"
-  | "exterior"
-  | "commercial"
-  | "education"
-  | "office"
-  | "retail"
-  | "building"
-  | "civil"
-  | "residential";
+type Category = string;
 
-const CATEGORIES: { label: string; value: Category }[] = [
+// Preset category tabs — mirrors the admin form's category options.
+const PRESET_CATEGORIES: { label: string; value: string }[] = [
   { label: "All Projects", value: "all" },
   { label: "Interior", value: "interior" },
+  { label: "Painting", value: "painting" },
+  { label: "Water Proofing", value: "water-proofing" },
+  { label: "Wall Paper Hanging", value: "wall-paper-hanging" },
+  { label: "Roofing", value: "roofing" },
+  { label: "Steam Cleaning", value: "steam-cleaning" },
   { label: "Exterior", value: "exterior" },
   { label: "Commercial", value: "commercial" },
-  { label: "Industrial", value: "industrial" },
-  { label: "Residential", value: "residential" },
-  { label: "Education", value: "education" },
   { label: "Office", value: "office" },
-  { label: "Retail", value: "retail" },
-  { label: "Buildings", value: "building" },
+  { label: "Building", value: "building" },
 ];
+
+// Turn a category slug into a readable label (for custom "Others" values).
+const humanizeCategory = (value: string) =>
+  value
+    .split(/[-_\s]+/)
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(" ");
 
 // Normalized card shape shared by live (API) and static (fallback) data.
 type PortfolioCard = {
@@ -111,6 +109,15 @@ export default function PortfolioClient({ projects }: { projects: Project[] }) {
     }));
   }, [liveProjects, projects]);
 
+  // Tabs = preset categories + any custom ("Others") categories found in data.
+  const categories = useMemo(() => {
+    const presetValues = new Set(PRESET_CATEGORIES.map((c) => c.value));
+    const custom = [...new Set(cards.map((c) => c.category))]
+      .filter((v) => v && !presetValues.has(v))
+      .map((v) => ({ label: humanizeCategory(v), value: v }));
+    return [...PRESET_CATEGORIES, ...custom];
+  }, [cards]);
+
   const filtered = useMemo(() => {
     if (activeTab === "all") return cards;
     return cards.filter((c) => c.category === activeTab);
@@ -126,7 +133,7 @@ export default function PortfolioClient({ projects }: { projects: Project[] }) {
         <div className=" -mx-4 mb-8 border-b bg-muted/40 backdrop-blur supports-[backdrop-filter]:bg-muted/60">
           <div className="container mx-auto max-w-7xl px-4">
             <TabsList className="w-full justify-start gap-1 overflow-x-auto rounded-none bg-transparent p-0">
-              {CATEGORIES.map((c) => (
+              {categories.map((c) => (
                 <TabsTrigger
                   key={c.value}
                   value={c.value}

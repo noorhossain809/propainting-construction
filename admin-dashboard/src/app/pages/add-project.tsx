@@ -233,6 +233,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
 import { useCreateProjectMutation } from "@/redux/api/constructionProjectApi"
+import { PROJECT_CATEGORIES } from "@/lib/categories"
 
 
 type FormState = {
@@ -280,6 +281,8 @@ export function ProjectForm() {
   const [createProject, { isLoading }] = useCreateProjectMutation()
 
   const [form, setForm] = React.useState<FormState>(initialState)
+  // Tracks the category dropdown choice; "others" reveals a custom input.
+  const [categoryChoice, setCategoryChoice] = React.useState<string>("")
   const [completedDate, setCompletedDate] = React.useState<Date>()
   const [mainImage, setMainImage] = React.useState<File | null>(null)
   const [gallery, setGallery] = React.useState<File[]>([])
@@ -428,16 +431,32 @@ export function ProjectForm() {
           </div>
           <div className="space-y-2">
             <Label htmlFor="category">Category</Label>
-            <Select value={form.category} onValueChange={(v) => handleChange("category", v)}>
+            <Select
+              value={categoryChoice}
+              onValueChange={(v) => {
+                setCategoryChoice(v)
+                handleChange("category", v === "others" ? "" : v)
+              }}
+            >
               <SelectTrigger id="category">
                 <SelectValue placeholder="Select a category" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="interior">Interior</SelectItem>
-                <SelectItem value="exterior">Exterior</SelectItem>
-                <SelectItem value="commercial">Commercial</SelectItem>
+                {PROJECT_CATEGORIES.map((c) => (
+                  <SelectItem key={c.value} value={c.value}>
+                    {c.label}
+                  </SelectItem>
+                ))}
+                <SelectItem value="others">Others</SelectItem>
               </SelectContent>
             </Select>
+            {categoryChoice === "others" && (
+              <Input
+                placeholder="Enter custom category"
+                value={form.category}
+                onChange={(e) => handleChange("category", e.target.value)}
+              />
+            )}
           </div>
           <div className="space-y-2 md:col-span-2">
             <Label htmlFor="description">Description</Label>

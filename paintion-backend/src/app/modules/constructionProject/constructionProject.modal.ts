@@ -43,7 +43,7 @@ export type IProject = {
   title: string;
   slug: string;
   projectType: 'Interior Painting' | 'Exterior Painting' | 'Commercial Painting' | 'Renovation';
-  category: 'interior' | 'exterior' | 'commercial';
+  category: string;
   description: string;
   location?: string;
   duration?: string;
@@ -83,10 +83,11 @@ const projectSchema = new Schema<IProject>(
       enum: ['Interior Painting', 'Exterior Painting', 'Commercial Painting', 'Renovation'],
       required: [true, 'Project type is required'],
     },
+    // Free-form so predefined categories AND custom ("Others") values are allowed.
     category: {
       type: String,
-      enum: ['interior', 'exterior', 'commercial'],
       required: [true, 'Category is required'],
+      trim: true,
     },
     description: {
       type: String,
