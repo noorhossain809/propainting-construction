@@ -5,6 +5,7 @@ import catchAsync from "../../../shared/catchAsync"
 import sendResponse from "../../../shared/sendResponse"
 import { ContactMessageService } from "./contactMessage.service"
 import { sendEmail } from "../../../helpers/sendEmail"
+import { isValidUsPhone } from "../../../helpers/usPhone"
 
 const escapeHtml = (value = "") =>
     value
@@ -45,13 +46,8 @@ const createMessage = catchAsync(async (req: Request, res: Response) => {
         })
     }
 
-    // US phone number (NANP): 10 digits, optional +1; area/exchange start 2-9.
-    const phoneDigits = String(phone).replace(/\D/g, "")
-    const tenDigits =
-        phoneDigits.length === 11 && phoneDigits.startsWith("1")
-            ? phoneDigits.slice(1)
-            : phoneDigits
-    if (!/^[2-9]\d{2}[2-9]\d{6}$/.test(tenDigits)) {
+    // Valid US number: NANP structure + a real assigned area code.
+    if (!isValidUsPhone(phone)) {
         return sendResponse(res, {
             statusCode: httpStatus.BAD_REQUEST,
             success: false,

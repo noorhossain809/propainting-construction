@@ -13,6 +13,7 @@ import {
 import { Textarea } from "./textarea";
 import { Button } from "./button";
 import { useCreateContactMessageMutation } from "@/redux/api/contactMessageApi";
+import { isValidUsPhone } from "@/lib/usPhone";
 
 type FormState = {
   name: string;
@@ -28,15 +29,6 @@ const EMPTY_FORM: FormState = {
   email: "",
   projectType: "",
   projectDetails: "",
-};
-
-// Validate a US phone number (NANP): 10 digits, optional leading +1.
-// Area code and exchange must start 2-9.
-const isValidUsPhone = (raw: string): boolean => {
-  const digits = raw.replace(/\D/g, "");
-  const ten =
-    digits.length === 11 && digits.startsWith("1") ? digits.slice(1) : digits;
-  return /^[2-9]\d{2}[2-9]\d{6}$/.test(ten);
 };
 
 const ContactForm = () => {
