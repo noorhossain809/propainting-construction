@@ -30,6 +30,15 @@ const EMPTY_FORM: FormState = {
   projectDetails: "",
 };
 
+// Validate a US phone number (NANP): 10 digits, optional leading +1.
+// Area code and exchange must start 2-9.
+const isValidUsPhone = (raw: string): boolean => {
+  const digits = raw.replace(/\D/g, "");
+  const ten =
+    digits.length === 11 && digits.startsWith("1") ? digits.slice(1) : digits;
+  return /^[2-9]\d{2}[2-9]\d{6}$/.test(ten);
+};
+
 const ContactForm = () => {
   const [form, setForm] = useState<FormState>(EMPTY_FORM);
   const [success, setSuccess] = useState(false);
@@ -52,6 +61,13 @@ const ContactForm = () => {
 
     if (!form.name || !form.phone || !form.email || !form.projectType) {
       setErrorMsg("Please fill in your name, phone, email and project type.");
+      return;
+    }
+
+    if (!isValidUsPhone(form.phone)) {
+      setErrorMsg(
+        "Please enter a valid US phone number, e.g. (123) 456-7890."
+      );
       return;
     }
 

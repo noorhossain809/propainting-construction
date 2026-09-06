@@ -45,6 +45,21 @@ const createMessage = catchAsync(async (req: Request, res: Response) => {
         })
     }
 
+    // US phone number (NANP): 10 digits, optional +1; area/exchange start 2-9.
+    const phoneDigits = String(phone).replace(/\D/g, "")
+    const tenDigits =
+        phoneDigits.length === 11 && phoneDigits.startsWith("1")
+            ? phoneDigits.slice(1)
+            : phoneDigits
+    if (!/^[2-9]\d{2}[2-9]\d{6}$/.test(tenDigits)) {
+        return sendResponse(res, {
+            statusCode: httpStatus.BAD_REQUEST,
+            success: false,
+            message: "Please provide a valid US phone number",
+            data: null,
+        })
+    }
+
     const result = await ContactMessageService.createIntoDB({
         name,
         phone,
