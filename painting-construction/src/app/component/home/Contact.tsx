@@ -1,20 +1,11 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Phone, Mail, MapPin, Clock, Upload } from "lucide-react";
+import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import { Variants, motion } from "framer-motion";
 import { useGetContactInfoQuery } from "@/redux/api/contactInfoApi";
 import { Loader } from "@/components/ui/Loader";
+import ContactForm from "@/components/ui/contactForm";
 
 type ContactInfoData = {
   phoneOne: string;
@@ -83,53 +74,6 @@ const buildContactInfo = (info: ContactInfoData): InfoCard[] => [
   },
 ];
 
-const formFields = [
-  {
-    type: "input",
-    label: "Full Name *",
-    placeholder: "John Smith",
-    name: "fullName",
-  },
-  {
-    type: "input",
-    label: "Phone Number *",
-    placeholder: "(123) 456-7890",
-    name: "phone",
-  },
-  {
-    type: "input",
-    label: "Email Address *",
-    placeholder: "john@example.com",
-    name: "email",
-    inputType: "email",
-  },
-  {
-    type: "select",
-    label: "Project Type *",
-    name: "projectType",
-    options: [
-      { value: "interior-painting", label: "Interior Painting" },
-      { value: "exterior-painting", label: "Exterior Painting" },
-      { value: "renovation", label: "Renovation & Remodeling" },
-      { value: "drywall", label: "Drywall & Plastering" },
-      { value: "flooring", label: "Flooring & Tiling" },
-      { value: "custom", label: "Custom Project" },
-    ],
-  },
-  {
-    type: "textarea",
-    label: "Project Details",
-    placeholder:
-      "Tell us about your project - size, timeline, specific requirements, etc.",
-    name: "projectDetails",
-  },
-  {
-    type: "file",
-    label: "Upload Photos (Optional)",
-    name: "photos",
-  },
-];
-
 const headingContainer = {
   hidden: { opacity: 0 },
   visible: {
@@ -179,11 +123,6 @@ const formContainer: Variants = {
     opacity: 1,
     transition: { staggerChildren: 0.05, delayChildren: 0.2 },
   },
-};
-
-const formChild: Variants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { ease: "easeOut", duration: 0.5 } },
 };
 
 const Contact = () => {
@@ -312,7 +251,7 @@ const Contact = () => {
             })}
           </motion.div>
 
-          {/* Quote Form */}
+          {/* Quote Form — shared, wired component (submits + validates phone) */}
           <motion.div
             className="lg:col-span-2"
             variants={formContainer}
@@ -320,104 +259,7 @@ const Contact = () => {
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
           >
-            <motion.div variants={formChild}>
-              <Card className="border-0 shadow-construction">
-                <CardContent className="p-8">
-                  <form className="space-y-6">
-                    {formFields.map((field, i) => (
-                      <motion.div key={i} variants={formChild}>
-                        <label className="block text-sm font-medium text-foreground mb-2">
-                          {field.label}
-                        </label>
-
-                        {field.type === "input" && (
-                          <Input
-                            type={field.inputType || "text"}
-                            placeholder={field.placeholder}
-                            className="border-input"
-                          />
-                        )}
-
-                        {field.type === "select" && (
-                          <Select>
-                            <SelectTrigger className="w-full border-input">
-                              <SelectValue placeholder="Select project type" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              {field.type === "select" &&
-                                field.options?.map((option) => (
-                                  <SelectItem
-                                    key={option.value}
-                                    value={option.value}
-                                  >
-                                    {option.label}
-                                  </SelectItem>
-                                ))}
-                            </SelectContent>
-                          </Select>
-                        )}
-
-                        {field.type === "textarea" && (
-                          <Textarea
-                            placeholder={field.placeholder}
-                            className="min-h-32 border-input"
-                          />
-                        )}
-
-                        {field.type === "file" && (
-                          <div className="border-2 border-dashed border-input rounded-lg p-6 text-center">
-                            <Upload
-                              className="mx-auto text-muted-foreground mb-2"
-                              size={24}
-                            />
-                            <p className="text-muted-foreground text-sm">
-                              Drag & drop photos or{" "}
-                              <span className="text-primary cursor-pointer">
-                                browse files
-                              </span>
-                            </p>
-                            <p className="text-xs text-muted-foreground mt-1">
-                              JPG, PNG up to 10MB each
-                            </p>
-                          </div>
-                        )}
-                      </motion.div>
-                    ))}
-
-                    {/* Submit Button */}
-                    <motion.div
-                      variants={formChild}
-                      className="flex justify-end sm:flex-row gap-4"
-                    >
-                      <Button
-                        size="lg"
-                        className="group relative overflow-hidden rounded-md bg-amber-500 lg:px-6 px-3 lg:py-6 py-3 text-white text-base hover:bg-amber-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500/40"
-                      >
-                        <span
-                          className="pointer-events-none absolute inset-0 left-0 w-0 bg-[#0B2653] transition-[width] duration-400 ease-out group-hover:w-full"
-                          aria-hidden="true"
-                        />
-                        <span className="relative z-10 flex items-center gap-1.5 transition-colors duration-300 group-hover:text-white">
-                          Get Free Quote
-                          <svg
-                            className="h-5 w-5"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <path d="M5 12h14" />
-                            <path d="m12 5 7 7-7 7" />
-                          </svg>
-                        </span>
-                      </Button>
-                    </motion.div>
-                  </form>
-                </CardContent>
-              </Card>
-            </motion.div>
+            <ContactForm />
           </motion.div>
         </div>
       </div>

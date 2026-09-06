@@ -47,6 +47,10 @@ const ContactForm = () => {
   const [createContactMessage, { isLoading }] =
     useCreateContactMessageMutation();
 
+  // Live phone validation state for inline feedback while typing.
+  const phoneEntered = form.phone.trim().length > 0;
+  const phoneValid = isValidUsPhone(form.phone);
+
   const update =
     (field: keyof FormState) =>
     (
@@ -110,12 +114,34 @@ const ContactForm = () => {
                   Phone Number *
                 </label>
                 <Input
+                  type="tel"
+                  inputMode="tel"
                   placeholder="(123) 456-7890"
-                  className="border-input"
+                  className={`border-input ${
+                    phoneEntered && !phoneValid
+                      ? "border-red-400 focus-visible:ring-red-200"
+                      : phoneValid
+                      ? "border-green-500 focus-visible:ring-green-200"
+                      : ""
+                  }`}
                   value={form.phone}
                   onChange={update("phone")}
                   required
+                  aria-invalid={phoneEntered ? !phoneValid : undefined}
                 />
+                {/* Keep prompting until a valid US number is entered */}
+                {!phoneValid && (
+                  <p className="mt-1 text-xs font-medium text-red-600">
+                    {phoneEntered
+                      ? "That doesn't look like a valid US number — please verify, e.g. (123) 456-7890."
+                      : "Enter a valid US phone number, e.g. (123) 456-7890."}
+                  </p>
+                )}
+                {phoneValid && (
+                  <p className="mt-1 text-xs font-medium text-green-600">
+                    ✓ Looks good
+                  </p>
+                )}
               </div>
             </div>
 
