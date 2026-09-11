@@ -11,7 +11,6 @@ export const metadata: Metadata = {
 };
 
 import ServicesPageClient from "../component/client-component/ServicesPageClient";
-import { services } from "../data/projects";
 
 export default function ServicesPage() {
   const jsonLd = {
@@ -29,22 +28,6 @@ export default function ServicesPage() {
       addressRegion: "NY",
       postalCode: "11203",
       addressCountry: "US",
-    },
-    hasOfferCatalog: {
-      "@type": "OfferCatalog",
-      name: "Painting and Construction Services",
-      itemListElement: services.map((service) => ({
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: service.title,
-          description: service.description,
-          areaServed: {
-            "@type": "City",
-            name: "New York",
-          },
-        },
-      })),
     },
   };
   return (

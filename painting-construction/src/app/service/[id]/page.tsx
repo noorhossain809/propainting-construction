@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { services } from "@/app/data/projects";
 import { ArrowLeft } from "lucide-react";
 import { notFound } from "next/navigation";
 
@@ -51,23 +50,8 @@ async function fetchLiveService(id: string): Promise<ServiceDetail | null> {
   }
 }
 
-// Fall back to the committed static dataset (kept for offline/empty backend).
-function fromStatic(id: string): ServiceDetail | null {
-  const s = services.find((p) => p.id === id);
-  if (!s) return null;
-  return {
-    id: s.id ?? id,
-    title: s.title,
-    description: s.description ?? "",
-    image: s.image,
-    alt: s.alt,
-    heading: s.details.heading,
-    paragraphs: [s.details.p1, s.details.p2].filter(Boolean),
-  };
-}
-
 async function loadService(id: string): Promise<ServiceDetail | null> {
-  return (await fetchLiveService(id)) ?? fromStatic(id);
+  return fetchLiveService(id);
 }
 
 // Prefix relative asset paths with the site domain; leave absolute URLs intact.

@@ -28,7 +28,6 @@ import {
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { services } from "@/app/data/projects";
 import { useGetAllServicesQuery } from "@/redux/api/constructionServiceApi";
 
 // Normalized dropdown item shared by live (API) and static (fallback) data.
@@ -44,25 +43,17 @@ const Header: React.FC = () => {
 
   const { data: liveServices } = useGetAllServicesQuery();
 
-  // Prefer live API services (active, ordered); fall back to the static list.
-  const dropdownServices: DropdownService[] = (
-    liveServices && liveServices.length > 0
-      ? [...liveServices]
-          .filter((s) => s.isActive !== false)
-          .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
-          .map((s) => ({
-            id: s._id,
-            title: s.title,
-            description: s.shortDescription,
-            image: s.heroImage?.url ?? "",
-          }))
-      : services.map((s) => ({
-          id: s.id ?? "#",
-          title: s.title,
-          description: s.description ?? "",
-          image: s.image,
-        }))
-  ).slice(0, 3);
+  // Live API services only (active, ordered).
+  const dropdownServices: DropdownService[] = [...(liveServices ?? [])]
+    .filter((s) => s.isActive !== false)
+    .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+    .map((s) => ({
+      id: s._id,
+      title: s.title,
+      description: s.shortDescription,
+      image: s.heroImage?.url ?? "",
+    }))
+    .slice(0, 3);
 
   return (
     <>
@@ -90,7 +81,7 @@ const Header: React.FC = () => {
               >
                 {/* the black wipe */}
                 <span
-                  className="pointer-events-none absolute inset-0 left-0 w-0 bg-black transition-[width] duration-400 ease-out group-hover:w-full"
+                  className="pointer-events-none absolute inset-0 left-0 w-0 bg-[#061530] transition-[width] duration-400 ease-out group-hover:w-full"
                   aria-hidden="true"
                 />
                 {/* label stays above the wipe */}
@@ -321,7 +312,7 @@ const Header: React.FC = () => {
                             >
                               {/* the black wipe */}
                               <span
-                                className="pointer-events-none absolute inset-0 left-0 w-0 bg-black transition-[width] duration-400 ease-out group-hover:w-full"
+                                className="pointer-events-none absolute inset-0 left-0 w-0 bg-[#0B2653] transition-[width] duration-400 ease-out group-hover:w-full"
                                 aria-hidden="true"
                               />
                               {/* label stays above the wipe */}
@@ -427,7 +418,7 @@ const Header: React.FC = () => {
                       >
                         {/* the black wipe */}
                         <span
-                          className="pointer-events-none absolute inset-0 left-0 w-0 bg-black transition-[width] duration-400 ease-out group-hover:w-full"
+                          className="pointer-events-none absolute inset-0 left-0 w-0 bg-[#0B2653] transition-[width] duration-400 ease-out group-hover:w-full"
                           aria-hidden="true"
                         />
                         {/* label stays above the wipe */}

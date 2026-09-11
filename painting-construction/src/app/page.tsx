@@ -6,7 +6,6 @@ import Portfolio from "./component/home/Portfolio";
 import ServicesSection from "./component/home/ServicesSection";
 import Testimonials from "./component/home/Testimonials";
 import { Metadata } from "next";
-import { services } from "./data/projects";
 
 export const metadata: Metadata = {
   title:
@@ -29,7 +28,12 @@ export default function Home() {
     url: "https://propaintconstruction.com",
     telephone: "+1-917-539-8168",
     email: "mrh_nyc@yahoo.com",
-    serviceType: services.map((service) => service.title),
+    serviceType: [
+      "Interior Painting",
+      "Exterior Painting",
+      "Commercial Painting",
+      "Renovation",
+    ],
     address: {
       "@type": "PostalAddress",
       streetAddress: "4017 Avenue D",

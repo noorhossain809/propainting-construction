@@ -48,22 +48,6 @@ type HeroView = {
   secondaryLink: string;
 };
 
-type Slide =
-  | {
-      kind: "video";
-      mp4: string;
-      webm?: string;
-      poster?: string;
-      title: string;
-      subtitle?: string;
-    }
-  | {
-      kind: "image";
-      src: string;
-      title: string;
-      subtitle?: string;
-    };
-
 const headingVariants: Variants = {
   hidden: { opacity: 0, y: 40 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
@@ -84,75 +68,31 @@ const child = {
   visible: { opacity: 1, y: 0 },
 };
 
-const slides: Slide[] = [
-  {
-    kind: "video",
-    mp4: "/videos/construction.mp4",
-    title: "Expert Painting & Construction Services in New York, USA",
-    subtitle:
-      "From residential buildings to commercial complexes, we build with trust and quality.",
-  },
-  {
-    kind: "video",
-    mp4: "/videos/painting.mp4",
-    title: "Professional Painting for Homes & Offices",
-    subtitle:
-      "Transform your space with our premium painting services and skilled professionals.",
-  },
-  {
-    kind: "video",
-    mp4: "/videos/steam-cleaning.mp4",
-    title: "Professional Steam Cleaning Services",
-    subtitle:
-      "Deep-cleaning carpets, upholstery, and tiles with eco-friendly steam technology.",
-  },
-  {
-    kind: "image",
-    src: "/assets/construct-planning.jpg",
-    title: "Your Vision, Our Blueprint",
-    subtitle: "Meticulous planning and on-time project delivery guaranteed.",
-  },
-];
-
-// Static fallback slides mapped into the normalized view shape.
-const fallbackViews: HeroView[] = slides.map((s, i) => ({
-  key: `static-${i}`,
-  kind: s.kind,
-  src: s.kind === "video" ? s.mp4 : s.src,
-  title: s.title,
-  subtitle: s.subtitle,
-  badge: DEFAULT_BADGE,
-  primaryText: DEFAULT_PRIMARY.text,
-  primaryLink: DEFAULT_PRIMARY.link,
-  secondaryText: DEFAULT_SECONDARY.text,
-  secondaryLink: DEFAULT_SECONDARY.link,
-}));
-
 export default function HeroBanner() {
   const { data: liveSlides } = useGetAllHeroSlidesQuery();
 
-  // Prefer live API slides (active, ordered); fall back to the static list.
-  const views: HeroView[] =
-    liveSlides && liveSlides.length > 0
-      ? [...liveSlides]
-          .filter((s) => s.isActive !== false)
-          .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
-          .map((s) => ({
-            key: s._id,
-            kind: s.mediaType === "video" ? "video" : "image",
-            src:
-              s.mediaType === "video"
-                ? s.videoUrl ?? ""
-                : s.backgroundImage?.url ?? "",
-            title: s.title,
-            subtitle: s.subtitle,
-            badge: s.badgeText || DEFAULT_BADGE,
-            primaryText: s.primaryButtonText || DEFAULT_PRIMARY.text,
-            primaryLink: s.primaryButtonLink || DEFAULT_PRIMARY.link,
-            secondaryText: s.secondaryButtonText || DEFAULT_SECONDARY.text,
-            secondaryLink: s.secondaryButtonLink || DEFAULT_SECONDARY.link,
-          }))
-      : fallbackViews;
+  // Live API slides only (active, ordered).
+  const views: HeroView[] = (liveSlides ?? [])
+    .filter((s) => s.isActive !== false)
+    .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+    .map((s) => ({
+      key: s._id,
+      kind: s.mediaType === "video" ? "video" : "image",
+      src:
+        s.mediaType === "video"
+          ? s.videoUrl ?? ""
+          : s.backgroundImage?.url ?? "",
+      title: s.title,
+      subtitle: s.subtitle,
+      badge: s.badgeText || DEFAULT_BADGE,
+      primaryText: s.primaryButtonText || DEFAULT_PRIMARY.text,
+      primaryLink: s.primaryButtonLink || DEFAULT_PRIMARY.link,
+      secondaryText: s.secondaryButtonText || DEFAULT_SECONDARY.text,
+      secondaryLink: s.secondaryButtonLink || DEFAULT_SECONDARY.link,
+    }));
+
+  // Nothing to show until live slides load (GlobalLoader covers the wait).
+  if (views.length === 0) return null;
 
   return (
     <section className="relative mx-auto max-h-screen overflow-hidden">

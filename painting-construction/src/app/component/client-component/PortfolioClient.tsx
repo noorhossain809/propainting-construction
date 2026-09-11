@@ -10,7 +10,6 @@ import {
 import Link from "next/link";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
-import { Project } from "@/app/data/projects";
 import { useGetAllProjectsQuery } from "@/redux/api/constructionProjectApi";
 
 // Types and Constants
@@ -80,34 +79,24 @@ const itemVariants: Variants = {
   exit: { opacity: 0, y: 6, transition: { duration: 0.26 } },
 };
 
-// `projects` is the static dataset, kept as a graceful fallback whenever the
-// live backend has no data yet or the request fails.
-export default function PortfolioClient({ projects }: { projects: Project[] }) {
+export default function PortfolioClient() {
   const [activeTab, setActiveTab] = useState<Category>("all");
 
   const { data: liveProjects, isLoading, isError } = useGetAllProjectsQuery();
 
-  // Prefer live API data; fall back to the committed static list.
-  const cards: PortfolioCard[] = useMemo(() => {
-    if (liveProjects && liveProjects.length > 0) {
-      return liveProjects.map((p) => ({
+  // Live API data only.
+  const cards: PortfolioCard[] = useMemo(
+    () =>
+      (liveProjects ?? []).map((p) => ({
         key: p._id,
         href: `/our-work/${p._id}`,
         title: p.title,
         category: p.category,
         image: p.mainImage?.url ?? "",
         alt: p.mainImage?.alt || p.title,
-      }));
-    }
-    return projects.map((p) => ({
-      key: p.id,
-      href: `/our-work/${p.id}`,
-      title: p.title,
-      category: p.category,
-      image: p.image,
-      alt: p.alt,
-    }));
-  }, [liveProjects, projects]);
+      })),
+    [liveProjects]
+  );
 
   // Tabs show ONLY categories that actually have projects (plus "All").
   // A category tab appears once a project in that category exists.

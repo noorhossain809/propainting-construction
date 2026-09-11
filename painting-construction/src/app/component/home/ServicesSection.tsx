@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import { services } from "@/app/data/projects";
 import {
   Carousel,
   CarouselContent,
@@ -61,30 +60,19 @@ const child = {
 export default function ServicesSection() {
   const { data: liveServices, isLoading } = useGetAllServicesQuery();
 
-  // Prefer live API data (active, ordered); fall back to the static list.
-  const cards: ServiceCardData[] =
-    liveServices && liveServices.length > 0
-      ? [...liveServices]
-          .filter((s) => s.isActive !== false)
-          .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
-          .map((s) => ({
-            key: s._id,
-            id: s._id,
-            title: s.title,
-            image: s.heroImage?.url ?? "",
-            alt: s.heroImage?.alt || s.title,
-            featured: true,
-            description: s.shortDescription,
-          }))
-      : services.map((s, idx) => ({
-          key: s.id ?? String(idx),
-          id: s.id ?? "#",
-          title: s.title,
-          image: s.image,
-          alt: s.alt,
-          featured: s.featured,
-          description: s.description,
-        }));
+  // Live API data only (active, ordered).
+  const cards: ServiceCardData[] = [...(liveServices ?? [])]
+    .filter((s) => s.isActive !== false)
+    .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+    .map((s) => ({
+      key: s._id,
+      id: s._id,
+      title: s.title,
+      image: s.heroImage?.url ?? "",
+      alt: s.heroImage?.alt || s.title,
+      featured: true,
+      description: s.shortDescription,
+    }));
 
   return (
     <section
@@ -203,7 +191,7 @@ export default function ServicesSection() {
               >
                 {/* the black wipe */}
                 <span
-                  className="pointer-events-none absolute inset-0 left-0 w-0 bg-black transition-[width] duration-400 ease-out group-hover:w-full"
+                  className="pointer-events-none absolute inset-0 left-0 w-0 bg-[#0B2653] transition-[width] duration-400 ease-out group-hover:w-full"
                   aria-hidden="true"
                 />
                 {/* label stays above the wipe */}

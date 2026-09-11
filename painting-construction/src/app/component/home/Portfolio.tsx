@@ -4,7 +4,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
-import { PROJECTS } from "@/app/data/projects";
 import { motion, Variants } from "framer-motion";
 import { useGetAllProjectsQuery } from "@/redux/api/constructionProjectApi";
 
@@ -55,28 +54,18 @@ const Portfolio = () => {
 
   const { data: liveProjects, isLoading } = useGetAllProjectsQuery();
 
-  // Prefer live API data; fall back to the committed static list.
-  const cards: PortfolioCard[] = (
-    liveProjects && liveProjects.length > 0
-      ? liveProjects.map((p) => ({
-          key: p._id,
-          href: `/our-work/${p._id}`,
-          image: p.mainImage?.url ?? "",
-          alt: p.mainImage?.alt || p.title,
-          type: p.projectType,
-          title: p.title,
-          description: p.description,
-        }))
-      : PROJECTS.map((p) => ({
-          key: p.id,
-          href: `/our-work/${p.id}`,
-          image: p.image,
-          alt: p.alt,
-          type: p.type,
-          title: p.title,
-          description: p.description,
-        }))
-  ).slice(0, 6);
+  // Live API data only.
+  const cards: PortfolioCard[] = (liveProjects ?? [])
+    .map((p) => ({
+      key: p._id,
+      href: `/our-work/${p._id}`,
+      image: p.mainImage?.url ?? "",
+      alt: p.mainImage?.alt || p.title,
+      type: p.projectType,
+      title: p.title,
+      description: p.description,
+    }))
+    .slice(0, 6);
 
   return (
     <section id="portfolio" className="py-20 bg-white">

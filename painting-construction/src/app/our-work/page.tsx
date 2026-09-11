@@ -3,7 +3,6 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import { PROJECTS } from "../data/projects";
 import PortfolioClient from "../component/client-component/PortfolioClient";
 
 export const metadata: Metadata = {
@@ -31,19 +30,6 @@ export default function PortfolioPage() {
         "@type": "ImageObject",
         url: "https://propaintconstruction.com/propainting_construction_web_logo.png",
       },
-    },
-    mainEntity: {
-      "@type": "ItemList",
-      itemListElement: PROJECTS.map((project, index) => ({
-        "@type": "ListItem",
-        position: index + 1,
-        item: {
-          "@type": "CreativeWork",
-          name: project.title,
-          image: `https://propaintconstruction.com${project.image}`,
-          url: "https://propaintconstruction.com/our-work",
-        },
-      })),
     },
   };
   return (
@@ -88,7 +74,7 @@ export default function PortfolioPage() {
       </section>
 
       {/* Interactive Part: Client Component */}
-      <PortfolioClient projects={PROJECTS} />
+      <PortfolioClient />
     </div>
   );
 }

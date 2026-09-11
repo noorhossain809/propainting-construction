@@ -6,7 +6,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import { services } from "@/app/data/projects";
 import { useGetAllServicesQuery } from "@/redux/api/constructionServiceApi";
 
 // Normalized card shape shared by live (API) and static (fallback) data.
@@ -65,27 +64,16 @@ const sentence =
 export default function ServicesPageClient() {
   const { data: liveServices, isLoading } = useGetAllServicesQuery();
 
-  // Prefer live API data; fall back to the committed static list.
-  const cards: ServiceCardData[] =
-    liveServices && liveServices.length > 0
-      ? liveServices.map((s) => ({
-          key: s._id,
-          id: s._id,
-          title: s.title,
-          image: s.heroImage?.url ?? "",
-          alt: s.heroImage?.alt || s.title,
-          featured: true,
-          description: s.shortDescription,
-        }))
-      : services.map((s, idx) => ({
-          key: s.id ?? String(idx),
-          id: s.id ?? "#",
-          title: s.title,
-          image: s.image,
-          alt: s.alt,
-          featured: s.featured,
-          description: s.description,
-        }));
+  // Live API data only.
+  const cards: ServiceCardData[] = (liveServices ?? []).map((s) => ({
+    key: s._id,
+    id: s._id,
+    title: s.title,
+    image: s.heroImage?.url ?? "",
+    alt: s.heroImage?.alt || s.title,
+    featured: true,
+    description: s.shortDescription,
+  }));
 
   return (
     <div className="min-h-screen bg-background">

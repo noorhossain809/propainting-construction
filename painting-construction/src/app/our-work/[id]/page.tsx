@@ -4,7 +4,6 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { PROJECTS } from "@/app/data/projects";
 import {
   MapPin,
   ArrowLeft,
@@ -86,28 +85,8 @@ async function fetchLiveProject(id: string): Promise<ProjectDetail | null> {
   }
 }
 
-// Fall back to the committed static dataset (kept for offline/empty backend).
-function fromStatic(id: string): ProjectDetail | null {
-  const p = PROJECTS.find((x) => x.id === id);
-  if (!p) return null;
-  return {
-    id: p.id,
-    type: p.type,
-    title: p.title,
-    description: p.description,
-    location: p.location,
-    category: p.category,
-    completedDate: p.completedDate,
-    gallery: p.gallery,
-    challenge: p.challenge,
-    solution: p.solution,
-    results: p.results,
-    testimonial: p.testimonial,
-  };
-}
-
 async function loadProject(id: string): Promise<ProjectDetail | null> {
-  return (await fetchLiveProject(id)) ?? fromStatic(id);
+  return fetchLiveProject(id);
 }
 
 // Render an ISO date (from the API) as a readable date; pass other strings through.
