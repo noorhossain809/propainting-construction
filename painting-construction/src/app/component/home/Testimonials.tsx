@@ -100,7 +100,7 @@ export default function Testimonials() {
         }
         .enova-testimonials .swiper-pagination-bullet-active {
           background: #fff;
-          border: 2px solid #2563eb;
+          border: 2px solid #f59e0b;
           width: 12px; height: 12px;
         }
       `}</style>
