@@ -24,7 +24,7 @@ import { useGetAllHeroSlidesQuery } from "@/redux/api/heroSlideApi";
 // Defaults applied to slides that don't specify their own badge/buttons.
 const DEFAULT_BADGE = "PRO PAINTING CONSTRUCTION";
 const DEFAULT_PRIMARY = { text: "Get Started", link: "/contact" };
-const DEFAULT_SECONDARY = { text: "View Projects", link: "/our-work" };
+const DEFAULT_SECONDARY = { text: "View Projects", link: "/our-works" };
 
 // Extract a YouTube video id from watch/share/embed URLs (null if not YouTube).
 function getYouTubeId(url: string): string | null {
@@ -68,6 +68,21 @@ const child = {
   visible: { opacity: 1, y: 0 },
 };
 
+// Shown only when there are no live hero slides.
+const FALLBACK_VIEW: HeroView = {
+  key: "fallback",
+  kind: "image",
+  src: "/assets/before-after.jpg",
+  title: "Expert Painting & Construction Services in New York, USA",
+  subtitle:
+    "From residential buildings to commercial complexes, we build with trust and quality.",
+  badge: DEFAULT_BADGE,
+  primaryText: DEFAULT_PRIMARY.text,
+  primaryLink: DEFAULT_PRIMARY.link,
+  secondaryText: DEFAULT_SECONDARY.text,
+  secondaryLink: DEFAULT_SECONDARY.link,
+};
+
 export default function HeroBanner() {
   const { data: liveSlides } = useGetAllHeroSlidesQuery();
 
@@ -91,8 +106,8 @@ export default function HeroBanner() {
       secondaryLink: s.secondaryButtonLink || DEFAULT_SECONDARY.link,
     }));
 
-  // Nothing to show until live slides load (GlobalLoader covers the wait).
-  if (views.length === 0) return null;
+  // Use live slides; if none, show a single static image slide.
+  const heroSlides = views.length > 0 ? views : [FALLBACK_VIEW];
 
   return (
     <section className="relative mx-auto max-h-screen overflow-hidden">
@@ -166,7 +181,7 @@ export default function HeroBanner() {
         keyboard={{ enabled: true }}
         className="relative"
       >
-        {views.map((s, idx) => (
+        {heroSlides.map((s, idx) => (
           <SwiperSlide key={s.key}>
             <div className="relative h-[75vh] md:h-[90vh]">
               {/* Background (video or image) */}

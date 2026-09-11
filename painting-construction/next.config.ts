@@ -20,7 +20,7 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
-        source: '/:path*', 
+        source: '/:path*',
         has: [
           {
             type: 'host',
@@ -30,6 +30,9 @@ const nextConfig: NextConfig = {
         destination: 'https://propaintconstruction.com/:path*',
         permanent: true,
       },
+      // Old route renamed to /our-works — 301 so existing links don't 404.
+      { source: '/our-work', destination: '/our-works', permanent: true },
+      { source: '/our-work/:id', destination: '/our-works/:id', permanent: true },
     ];
   },
 };

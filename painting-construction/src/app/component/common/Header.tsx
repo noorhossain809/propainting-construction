@@ -178,13 +178,13 @@ const Header: React.FC = () => {
                 </NavigationMenuItem>
                 <NavigationMenuItem>
                   <NavigationMenuTrigger>
-                    <Link href="/our-work">Our Works</Link>
+                    <Link href="/our-works">Our Works</Link>
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
                     <ul className="grid w-[100px] gap-4">
                       <li className="space-y-1">
                         <NavigationMenuLink asChild>
-                          <Link href="/our-work">Completed</Link>
+                          <Link href="/our-works">Completed</Link>
                         </NavigationMenuLink>
                         <NavigationMenuLink asChild>
                           <Link href="#">In Action</Link>
@@ -338,12 +338,12 @@ const Header: React.FC = () => {
                     </AccordionItem>
                     <AccordionItem value="list">
                       <AccordionTrigger className="px-2">
-                        <Link href="/our-work">Our Works</Link>
+                        <Link href="/our-works">Our Works</Link>
                       </AccordionTrigger>
                       <AccordionContent className="px-2">
                         <ul className="space-y-2">
                           <Link
-                            href="/our-work"
+                            href="/our-works"
                             className="block rounded-md border p-3"
                             onClick={() => setMobileOpen(false)}
                           >

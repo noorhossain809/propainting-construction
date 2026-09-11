@@ -58,7 +58,7 @@ const Portfolio = () => {
   const cards: PortfolioCard[] = (liveProjects ?? [])
     .map((p) => ({
       key: p._id,
-      href: `/our-work/${p._id}`,
+      href: `/our-works/${p._id}`,
       image: p.mainImage?.url ?? "",
       alt: p.mainImage?.alt || p.title,
       type: p.projectType,
@@ -212,7 +212,7 @@ const Portfolio = () => {
             transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <Link href="/our-work">
+            <Link href="/our-works">
               <Button
                 size="lg"
                 className="group relative overflow-hidden rounded-md bg-amber-500 lg:px-6 px-3 lg:py-6 py-3 text-white text-base hover:bg-amber-500"

@@ -122,7 +122,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
     title: `${project.title} | Our Work | Pro Painting Construction`,
     description: project.description,
      alternates: {
-      canonical: `/our-work/${project.id}`,
+      canonical: `/our-works/${project.id}`,
     },
   };
 }
@@ -171,7 +171,7 @@ const PortfolioDetails = async(props: Props) => {
     "@type": "CreativeWork",
     "name": project.title,
     "description": project.description,
-    "url": `https://propaintconstruction.com/our-work/${project.id}`,
+    "url": `https://propaintconstruction.com/our-works/${project.id}`,
     "image": project.gallery.map(toAbsolute),
     "provider": {
         "@type": "Organization",
@@ -212,7 +212,7 @@ const PortfolioDetails = async(props: Props) => {
               <p className="text-lg md:text-xl opacity-90 leading-relaxed mb-8">
                 {project?.description}
               </p>
-              <Link href="/our-work">
+              <Link href="/our-works">
                 <Button
                   variant="outline"
                   className="bg-white/10 backdrop-blur border-white/30 text-white hover:bg-white/20 hover:border-white/50 transition-all duration-300"

@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     "Browse our portfolio of completed painting and construction projects in New York. See our work in residential, commercial, industrial, and educational sectors.",
 
   alternates: {
-    canonical: "/our-work",
+    canonical: "/our-works",
   },
 };
 
@@ -20,7 +20,7 @@ export default function PortfolioPage() {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
     name: "Project Portfolio of Pro Painting Construction",
-    url: "https://propaintconstruction.com/our-work",
+    url: "https://propaintconstruction.com/our-works",
     description:
       "A collection of featured painting and construction projects completed by Pro Painting Construction in New York.",
     publisher: {

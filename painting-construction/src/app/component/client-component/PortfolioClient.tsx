@@ -89,7 +89,7 @@ export default function PortfolioClient() {
     () =>
       (liveProjects ?? []).map((p) => ({
         key: p._id,
-        href: `/our-work/${p._id}`,
+        href: `/our-works/${p._id}`,
         title: p.title,
         category: p.category,
         image: p.mainImage?.url ?? "",
