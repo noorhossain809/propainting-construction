@@ -15,10 +15,11 @@ paintion-backend/logs/
 paintion-backend/uploads/
 
 # ---- Env files (secrets) ----
+**/.env
+**/.env.*
 !**/.env.example
 
 # ---- Misc ----
 **/.DS_Store
 **/*.log
 **/.vercel
-config.bat
